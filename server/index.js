@@ -22,10 +22,10 @@ const fetch = require("node-fetch");
 
 app.get("/", function (req, res) {
   // for production
-  res.sendFile("build/index.html");
+  //   res.sendFile("build/index.html");
 
   // for development
-  // res.sendFile(path.resolve("public/index.html"));
+  res.sendFile(path.resolve("public/index.html"));
 });
 
 // designates what port the app will listen to for incoming requests
@@ -49,35 +49,33 @@ const movieApiConfiguration = async () => {
   );
   try {
     const configData = await config.json();
-    console.log(configData);
-    res.send(configData);
+    return configData;
   } catch (error) {
     console.error(error);
   }
 };
-movieApiConfiguration();
-// const movieApiConnect = async (movie) => {
-//   const movieName = await fetch(
-//     `https://api.themoviedb.org/3/search/movie?api_key=${key.movieApi}&language=en-US&query=${movie}`
-//   );
-//   try {
-//     await movieApiConfiguration();
-//     const movieData = await movieName.json();
-//     console.log(movieData);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
-// app.get(`getMovies`, async (req, res, next) => {
-//   console.log(req.query.movie);
-//   try {
-//     const connectApi = await movieApiConnect(req.query.movie);
-//     console.log(connectApi);
-//   } catch (err) {
-//     throw new Error(err);
-//   }
-// });
+const movieApiConnect = async (movie) => {
+  const movieName = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${key.movieApi}&language=en-US&query=${movie}`
+  );
+  try {
+    const movieData = await movieName.json();
+    return movieData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+app.get("/getMovies", async (req, res, next) => {
+  try {
+    await movieApiConfiguration();
+    const connectApi = await movieApiConnect(req.query.movie);
+    res.send(connectApi);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // export app
 module.exports = app;
