@@ -24,6 +24,9 @@ export default class Form extends Component {
     const { load } = this.props;
     const { loading } = this.state;
 
+    {
+      /* ["Bars","Circles","Rings","TailSpin","ThreeDots","Watch","RevolvingDot","Triangle","Plane","MutatingDots","CradleLoader"] */
+    }
     return (
       <React.Fragment>
         <form method="POST" onSubmit={this.onSubmit} id="movie-form">
@@ -40,7 +43,7 @@ export default class Form extends Component {
           </div>
           <button type="submit" form="movie-form" id="submit-btn" name="submit">
             {load === loading && (
-              <Loader type="Oval" color="white" height={20} width={20} />
+              <Loader type="ThreeDots" color="black" height={35} width={40} />
             )}
 
             {load !== loading && "Enter"}
