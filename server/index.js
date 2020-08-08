@@ -69,9 +69,9 @@ const movieApiConnect = async (movie) => {
 
 app.get("/getMovies", async (req, res, next) => {
   try {
-    await movieApiConfiguration();
+    const config = await movieApiConfiguration();
     const connectApi = await movieApiConnect(req.query.movie);
-    res.send(connectApi);
+    res.send({ ...config, ...connectApi });
   } catch (error) {
     console.log(error);
   }
