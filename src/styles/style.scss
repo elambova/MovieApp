@@ -1,3 +1,118 @@
+@import "reset.scss";
+
 body {
-  font-size: 20px;
+  font-family: "Lemonada", cursive;
+  background-color: aliceblue;
+  min-height: 100%;
+}
+
+#header,
+#footer {
+  text-align: center;
+  background-color: teal;
+  width: 100%;
+  color: white;
+  padding: 20px 0;
+}
+
+#header {
+  font-size: 40px;
+  top: 0;
+}
+
+#content {
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 10px;
+
+  form {
+    width: 50%;
+    padding-bottom: 10px;
+    margin: 20px auto;
+    border-bottom: 1px ridge rgb(142, 185, 185);
+
+    & > div {
+      display: grid;
+      grid-template-columns: auto auto;
+      margin-bottom: 20px;
+      align-items: center;
+
+      label {
+        text-align: right;
+        padding-right: 20px;
+      }
+
+      input[type="text"] {
+        margin-left: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid teal;
+        background-color: transparent;
+
+        &:focus,
+        &:active {
+          outline-color: teal;
+        }
+      }
+    }
+
+    #submit-btn {
+      text-transform: uppercase;
+      margin: 10px auto;
+      display: block;
+      border-radius: 5px;
+      border: 1px solid teal;
+      background-color: transparent;
+      padding: 10px;
+      width: 100px;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border: 1px solid teal;
+        outline-color: teal;
+        background-color: teal;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    & > div {
+      width: 200px;
+      height: 300px;
+      margin: 10px;
+      text-align: center;
+
+      & > p {
+        height: 30px;
+        overflow: hidden;
+      }
+      & > img {
+        height: 260px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #content form {
+    width: 90%;
+
+    & > div {
+      grid-template-columns: none;
+
+      label {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
