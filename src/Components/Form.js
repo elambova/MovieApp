@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Loader from "react-loader-spinner";
 
 export default class Form extends Component {
   state = {
     movie: "",
-    submit: true,
+    loading: false,
   };
 
   static propTypes = {
@@ -14,26 +15,36 @@ export default class Form extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     if (this.props.handleSubmit) {
-      this.props.handleSubmit(this.state.submit, this.state.movie);
+      this.setState({ loading: !this.state.loading });
+      this.props.handleSubmit(this.state.movie);
     }
   };
 
   render() {
+    const { load } = this.props;
+    const { loading } = this.state;
+
     return (
       <React.Fragment>
-        <form method="POST" onSubmit={this.onSubmit}>
+        <form method="POST" onSubmit={this.onSubmit} id="movie-form">
           <div>
             <label htmlFor="movie">Please enter movie name:</label>
             <input
               type="text"
-              placeholder="City"
+              placeholder="Movie"
               name="movie"
               id="movie"
               onChange={(e) => this.setState({ movie: e.target.value })}
               required
             />
           </div>
-          <input type="submit" id="submit-btn" value="Enter" name="submit" />
+          <button type="submit" form="movie-form" id="submit-btn" name="submit">
+            {load === loading && (
+              <Loader type="Oval" color="white" height={20} width={20} />
+            )}
+
+            {load !== loading && "Enter"}
+          </button>
         </form>
       </React.Fragment>
     );

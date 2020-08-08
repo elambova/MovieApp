@@ -7,24 +7,20 @@ import * as connect from "./ConnectionAPI/connect";
 class App extends Component {
   constructor() {
     super();
-    this.state = { movies: [], isSubmit: false };
+    this.state = { movies: [], load: true };
   }
 
-  handleSubmit = async (isSubmit, movie) => {
+  handleSubmit = async (movie) => {
     const movies = await connect.getMovies(movie).then((data) => data);
-    this.setState({ movies, isSubmit });
+    this.setState({ movies, load: !this.state.load });
   };
 
   render() {
-    const { movies, isSubmit } = this.state;
+    const { movies, load } = this.state;
     return (
       <React.Fragment>
         <Header />
-        <Content
-          movies={movies}
-          isSubmit={isSubmit}
-          handleSubmit={this.handleSubmit}
-        />
+        <Content movies={movies} handleSubmit={this.handleSubmit} load={load} />
         <Footer />
       </React.Fragment>
     );
