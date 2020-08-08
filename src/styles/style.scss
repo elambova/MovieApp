@@ -9,7 +9,8 @@ body {
 #header,
 #footer {
   text-align: center;
-  background-color: teal;
+  text-shadow: 1px 1px 1px black;
+  background-color: #02588a;
   width: 100%;
   color: white;
   padding: 20px 0;
@@ -46,12 +47,12 @@ body {
         margin-left: 20px;
         padding: 10px;
         border-radius: 5px;
-        border: 1px solid teal;
+        border: 1px solid #02588a;
         background-color: transparent;
 
         &:focus,
         &:active {
-          outline-color: teal;
+          outline-color: #02588a;
         }
       }
     }
@@ -61,18 +62,21 @@ body {
       margin: 10px auto;
       display: block;
       border-radius: 5px;
-      border: 1px solid teal;
+      border: 1px solid #02588a;
       background-color: transparent;
-      padding: 10px;
+      background-color: #02588a;
+      height: 40px;
       width: 100px;
+      color: #fff;
+      font-weight: bold;
 
       &:hover,
       &:active,
       &:focus {
-        border: 1px solid teal;
-        outline-color: teal;
-        background-color: teal;
-        color: white;
+        border: 1px solid #5abdf7;
+        outline-color: #5abdf7;
+        color: #000;
+        background-color: #5abdf7;
         cursor: pointer;
       }
     }
