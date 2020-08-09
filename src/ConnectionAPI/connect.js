@@ -8,7 +8,7 @@ const headers = {
   Authorization: token,
 };
 
-export const getMovies = async (movie) =>
-  await fetch(`${localhost}getMovies?movie=${movie}`, { headers })
+export const getData = async (name) =>
+  await fetch(`${localhost}getData?name=${name}`, { headers })
     .then((res) => res.json())
     .then((data) => data);
