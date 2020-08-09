@@ -5,22 +5,29 @@ import Footer from "./Components/Footer";
 import * as connect from "./ConnectionAPI/connect";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = { movies: [], load: true };
+  constructor(props) {
+    super(props);
+    this.state = { data: [], loading: false };
   }
 
-  handleSubmit = async (movie) => {
-    const movies = await connect.getMovies(movie).then((data) => data);
-    this.setState({ movies, load: !this.state.load });
+  handleSubmit = (data) => {
+    this.setState({ loading: true }, async () => {
+      await connect
+        .getData(data)
+        .then((data) => this.setState({ data: data, loading: false }));
+    });
   };
 
   render() {
-    const { movies, load } = this.state;
+    const { data, loading } = this.state;
     return (
       <React.Fragment>
         <Header />
-        <Content movies={movies} handleSubmit={this.handleSubmit} load={load} />
+        <Content
+          data={data}
+          handleSubmit={this.handleSubmit}
+          loading={loading}
+        />
         <Footer />
       </React.Fragment>
     );
