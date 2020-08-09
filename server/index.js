@@ -55,22 +55,23 @@ const movieApiConfiguration = async () => {
   }
 };
 
-const movieApiConnect = async (movie) => {
-  const movieName = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${key.movieApi}&language=en-US&query=${movie}`
+const movieApiConnect = async (name) => {
+  const dataName = await fetch(
+    `https://api.themoviedb.org/3/search/multi?api_key=${key.movieApi}&query=${name}`
   );
   try {
-    const movieData = await movieName.json();
-    return movieData;
+    const data = await dataName.json();
+    console.log(dataName);
+    return data;
   } catch (error) {
     console.error(error);
   }
 };
 
-app.get("/getMovies", async (req, res, next) => {
+app.get("/getData", async (req, res, next) => {
   try {
     const config = await movieApiConfiguration();
-    const connectApi = await movieApiConnect(req.query.movie);
+    const connectApi = await movieApiConnect(req.query.name);
     res.send({ ...config, ...connectApi });
   } catch (error) {
     console.log(error);
