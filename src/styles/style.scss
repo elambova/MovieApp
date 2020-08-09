@@ -82,6 +82,10 @@ body {
     }
   }
 
+  & > div {
+    text-align: center;
+  }
+
   .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -102,6 +106,10 @@ body {
       & > img {
         height: 260px;
       }
+    }
+
+    & > h3 {
+      flex: 0 0 100%;
     }
   }
 }
