@@ -2,10 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Movies(props) {
-  const { movies } = props;
+  const { movies, secure_url } = props;
   const moviesLenght = Object.values(movies).length;
-  const secure_url =
-    moviesLenght !== 0 ? movies.images.secure_base_url + "w185/" : "";
 
   return (
     <React.Fragment>
