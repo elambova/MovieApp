@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 
 function People(props) {
   const { people, secure_url } = props;
-  const peopleLenght = Object.values(people).length;
+  const peopleLenght = people.length;
 
   return (
     <React.Fragment>
       {peopleLenght > 0 && (
         <div id="person-info">
-          <h3 id="name">{people.results[0].name}</h3>
-          <img src={`${secure_url}${people.results[0].profile_path}`} alt="" />
+          <h3 id="name">{people[0].name}</h3>
+          <img src={`${secure_url}${people[0].profile_path}`} alt="" />
         </div>
       )}
       {peopleLenght > 0 &&
-        people.results.map((person) =>
+        people.map((person) =>
           person.known_for.map(
             (movie) =>
               movie.poster_path !== null &&
@@ -31,7 +31,7 @@ function People(props) {
 }
 
 People.propTypes = {
-  people: PropTypes.object.isRequired,
+  people: PropTypes.array.isRequired,
 };
 
 export default People;
