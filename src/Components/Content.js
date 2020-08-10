@@ -30,10 +30,12 @@ export default class Content extends Component {
       <div id="content">
         <form method="POST" onSubmit={this.onSubmit} id="data-form">
           <div>
-            <label htmlFor="data">Please enter name for search:</label>
+            <label htmlFor="data">
+              Please enter name for search (movie, person or tv show):
+            </label>
             <input
               type="text"
-              placeholder="Movie"
+              placeholder="Movie, Actor/Actress or TV Show"
               name="data"
               id="data"
               onChange={(e) => this.setState({ data: e.target.value })}
