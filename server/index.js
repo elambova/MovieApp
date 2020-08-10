@@ -71,7 +71,10 @@ app.get("/getData", async (req, res, next) => {
   try {
     const config = await movieApiConfiguration();
     const connectApi = await movieApiConnect(req.query.name);
-    res.send({ ...config, ...connectApi });
+
+    const imagesUrl = config.images.secure_base_url + "w185";
+    const apiData = [...connectApi.results];
+    res.send({ imagesUrl, apiData });
   } catch (error) {
     console.log(error);
   }
