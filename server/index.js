@@ -61,7 +61,6 @@ const movieApiConnect = async (name) => {
   );
   try {
     const data = await dataName.json();
-    console.log(dataName);
     return data;
   } catch (error) {
     console.error(error);
