@@ -95,12 +95,15 @@ body {
 
     & > div {
       width: 200px;
-      height: 300px;
+      height: 360px;
       margin: 10px;
       text-align: center;
 
       & > p {
-        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
         overflow: hidden;
       }
       & > img {
