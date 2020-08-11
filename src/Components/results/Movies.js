@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Movies(props) {
-  const { tv, secure_url } = props;
-  const tvLenght = tv.length;
+  const { movies, secure_url } = props;
+  const moviesLenght = movies.length;
 
   return (
     <React.Fragment>
-      {tvLenght > 0 &&
-        tv.map(
+      {moviesLenght > 0 &&
+        movies.map(
           (movie) =>
             movie.poster_path !== null && (
               <div key={movie.id} id={movie.id} className={movie.media_type}>
@@ -26,7 +26,7 @@ function Movies(props) {
 }
 
 Movies.propTypes = {
-  tv: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired,
 };
 
 export default Movies;
