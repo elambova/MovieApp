@@ -55,7 +55,7 @@ const movieApiConfiguration = async () => {
   }
 };
 
-const movieApiConnect = async (name) => {
+const movieApiMultiSearch = async (name) => {
   const dataName = await fetch(
     `https://api.themoviedb.org/3/search/multi?api_key=${key.movieApi}&query=${name}`
   );
@@ -67,13 +67,50 @@ const movieApiConnect = async (name) => {
   }
 };
 
+const movieApiIdSearch = async (id) => {
+  const dataMovie = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${key.movieApi}&language=en-US`
+  );
+  try {
+    const data = await dataMovie.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 app.get("/getData", async (req, res, next) => {
   try {
     const config = await movieApiConfiguration();
-    const connectApi = await movieApiConnect(req.query.name);
+    const connectApi = await movieApiMultiSearch(req.query.name);
 
     const imagesUrl = config.images.secure_base_url + "w185";
     const apiData = [...connectApi.results];
+    res.send({ imagesUrl, apiData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/getDataMovie", async (req, res, next) => {
+  try {
+    const config = await movieApiConfiguration();
+    const connectApi = await movieApiIdSearch(req.query.id);
+    const imagesUrl = config.images.secure_base_url;
+    const apiData = {
+      id: connectApi.id,
+      original_title: connectApi.original_title,
+      overview: connectApi.overview,
+      poster_path: connectApi.poster_path,
+      production_companies: connectApi.production_companies,
+      production_countries: connectApi.production_countries,
+      release_date: connectApi.release_date,
+      status: connectApi.status,
+      title: connectApi.title,
+      spoken_languages: connectApi.spoken_languages,
+      genres: connectApi.genres,
+    };
+
     res.send({ imagesUrl, apiData });
   } catch (error) {
     console.log(error);
