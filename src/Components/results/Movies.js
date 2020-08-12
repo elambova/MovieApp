@@ -1,13 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Form from "../Form";
+
 function Movies(props) {
-  const { movies, secure_url, handleClick } = props;
+  const {
+    movies,
+    secure_url,
+    handleClickMovie,
+    handleClickTv,
+    handleClickReferrer,
+  } = props;
   const moviesLenght = movies.length;
 
   const clickMovie = (id) => {
-    if (handleClick) {
-      handleClick(id);
+    if (handleClickMovie) {
+      handleClickMovie(id);
+    }
+  };
+
+  const clickTv = (id) => {
+    if (handleClickTv) {
+      handleClickTv(id);
     }
   };
 
@@ -21,7 +35,11 @@ function Movies(props) {
                 key={movie.id}
                 id={movie.id}
                 className={movie.media_type}
-                onClick={() => clickMovie(movie.id)}
+                onClick={() =>
+                  movie.media_type === "movie"
+                    ? clickMovie(movie.id)
+                    : clickTv(movie.id)
+                }
               >
                 <p>
                   {movie.title !== undefined
