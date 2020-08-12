@@ -43,7 +43,7 @@ const key = {
   movieApi: process.env.MOVIE_API_KEY,
 };
 
-const movieApiConfiguration = async () => {
+const apiConfiguration = async () => {
   const config = await fetch(
     `https://api.themoviedb.org/3/configuration?api_key=${key.movieApi}`
   );
@@ -79,9 +79,32 @@ const movieApiIdSearch = async (id) => {
   }
 };
 
+const tvApiIdSearch = async (id) => {
+  const dataMovie = await fetch(
+    `https://api.themoviedb.org/3/tv/${id}?api_key=${key.movieApi}&language=en-US`
+  );
+  try {
+    const data = await dataMovie.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+const resonApiIdSearch = async (id) => {
+  const dataMovie = await fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${key.movieApi}&language=en-US`
+  );
+  try {
+    const data = await dataMovie.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 app.get("/getData", async (req, res, next) => {
   try {
-    const config = await movieApiConfiguration();
+    const config = await apiConfiguration();
     const connectApi = await movieApiMultiSearch(req.query.name);
 
     const imagesUrl = config.images.secure_base_url + "w185";
@@ -94,7 +117,7 @@ app.get("/getData", async (req, res, next) => {
 
 app.get("/getDataMovie", async (req, res, next) => {
   try {
-    const config = await movieApiConfiguration();
+    const config = await apiConfiguration();
     const connectApi = await movieApiIdSearch(req.query.id);
     const imagesUrl = config.images.secure_base_url;
     const apiData = {
@@ -109,9 +132,71 @@ app.get("/getDataMovie", async (req, res, next) => {
       title: connectApi.title,
       spoken_languages: connectApi.spoken_languages,
       genres: connectApi.genres,
+      homepage: connectApi.homepage,
     };
 
     res.send({ imagesUrl, apiData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/getDataTv", async (req, res, next) => {
+  try {
+    const config = await apiConfiguration();
+    const connectApi = await tvApiIdSearch(req.query.id);
+
+    const imagesUrl = config.images.secure_base_url;
+    const apiData = {
+      id: connectApi.id,
+      created_by: connectApi.created_by,
+      name: connectApi.name,
+      genres: connectApi.genres,
+      homepage: connectApi.homepage,
+      languages: connectApi.languages,
+      first_air_date: connectApi.first_air_date,
+      last_air_date: connectApi.last_air_date,
+      networks: connectApi.networks,
+      next_episode_to_air: connectApi.next_episode_to_air,
+      number_of_episodes: connectApi.number_of_episodes,
+      number_of_seasons: connectApi.number_of_seasons,
+      origin_country: connectApi.origin_country,
+      overview: connectApi.overview,
+      original_name: connectApi.original_name,
+      poster_path: connectApi.poster_path,
+      production_companies: connectApi.production_companies,
+      seasons: connectApi.seasons,
+      status: connectApi.status,
+    };
+
+    res.send({ imagesUrl, apiData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/getDataPerson", async (req, res, next) => {
+  try {
+    const config = await apiConfiguration();
+    const connectApi = await personApiIdSearch(req.query.id);
+    // const imagesUrl = config.images.secure_base_url;
+    // const apiData = {
+    //   id: connectApi.id,
+    //   original_title: connectApi.original_title,
+    //   overview: connectApi.overview,
+    //   poster_path: connectApi.poster_path,
+    //   production_companies: connectApi.production_companies,
+    //   production_countries: connectApi.production_countries,
+    //   release_date: connectApi.release_date,
+    //   status: connectApi.status,
+    //   title: connectApi.title,
+    //   spoken_languages: connectApi.spoken_languages,
+    //   genres: connectApi.genres,
+    //   homepage: connectApi.homepage,
+    // };
+
+    // res.send({ imagesUrl, apiData });
+    res.send({ connectApi });
   } catch (error) {
     console.log(error);
   }
