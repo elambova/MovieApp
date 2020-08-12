@@ -2,8 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Movies(props) {
-  const { movies, secure_url } = props;
+  const { movies, secure_url, handleClick } = props;
   const moviesLenght = movies.length;
+
+  const clickMovie = (id) => {
+    if (handleClick) {
+      handleClick(id);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -11,7 +17,12 @@ function Movies(props) {
         movies.map(
           (movie) =>
             movie.poster_path !== null && (
-              <div key={movie.id} id={movie.id} className={movie.media_type}>
+              <div
+                key={movie.id}
+                id={movie.id}
+                className={movie.media_type}
+                onClick={() => clickMovie(movie.id)}
+              >
                 <p>
                   {movie.title !== undefined
                     ? movie.title
