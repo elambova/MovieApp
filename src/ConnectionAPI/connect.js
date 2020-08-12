@@ -17,3 +17,13 @@ export const getDataMovie = async (id) =>
   await fetch(`${localhost}getDataMovie?id=${id}`, { headers })
     .then((res) => res.json())
     .then((data) => data);
+
+export const getDataTv = async (id) =>
+  await fetch(`${localhost}getDataTv?id=${id}`, { headers })
+    .then((res) => res.json())
+    .then((data) => data);
+
+export const getDataPerson = async (id) =>
+  await fetch(`${localhost}getDataPerson?id=${id}`, { headers })
+    .then((res) => res.json())
+    .then((data) => data);
