@@ -1,9 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Movies from "./results/Movies";
 import People from "./results/People";
+import { useHistory } from "react-router-dom";
 
-export default class ResultContainer extends Component {
-  renderComponentsByMediaType = (data, handleClick) => {
+function ResultContainer(props) {
+  const {
+    data,
+    handleClickMovie,
+    handleClickTv,
+    handleClickPerson,
+    handleClickReferrer,
+  } = props;
+
+  const renderComponentsByMediaType = (
+    data,
+    handleClickMovie,
+    handleClickTv,
+    handleClickPerson
+  ) => {
     const movies = [];
     const people = [];
     const secure_url = data.imagesUrl;
@@ -24,12 +39,13 @@ export default class ResultContainer extends Component {
         <React.Fragment>
           <People
             secure_url={secure_url}
-            handleClick={handleClick}
+            handleClickPerson={handleClickPerson}
             people={people}
           />
           <Movies
             secure_url={secure_url}
-            handleClick={handleClick}
+            handleClickMovie={handleClickMovie}
+            handleClickTv={handleClickTv}
             movies={movies}
           />
         </React.Fragment>
@@ -38,7 +54,8 @@ export default class ResultContainer extends Component {
       return (
         <Movies
           secure_url={secure_url}
-          handleClick={handleClick}
+          handleClickMovie={handleClickMovie}
+          handleClickTv={handleClickTv}
           movies={movies}
         />
       );
@@ -46,7 +63,7 @@ export default class ResultContainer extends Component {
       return (
         <People
           secure_url={secure_url}
-          handleClick={handleClick}
+          handleClickPerson={handleClickPerson}
           people={people}
         />
       );
@@ -55,17 +72,35 @@ export default class ResultContainer extends Component {
     }
   };
 
-  render() {
-    const { data, handleClick } = this.props;
-    const dataLenght = Object.values(data).length;
+  const dataLenght = Object.values(data).length;
 
-    return (
-      <div className="content">
-        <div className="flex-container">
-          {dataLenght > 0 &&
-            this.renderComponentsByMediaType(data, handleClick)}
-        </div>
+  let history = useHistory();
+
+  const backToHome = () => {
+    handleClickReferrer();
+    history.push("/");
+  };
+
+  return (
+    <div className="content">
+      <div className="flex-container">
+        <button className="back" onClick={backToHome}>
+          &laquo;
+        </button>
+        {dataLenght > 0 &&
+          renderComponentsByMediaType(
+            data,
+            handleClickMovie,
+            handleClickTv,
+            handleClickPerson
+          )}
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+ResultContainer.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+export default ResultContainer;
