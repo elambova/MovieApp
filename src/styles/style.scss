@@ -1,5 +1,7 @@
 @import "reset.scss";
 
+$base-color: #02588a;
+
 body {
   font-family: "Lemonada", cursive;
   background-color: aliceblue;
@@ -10,7 +12,7 @@ body {
 #footer {
   text-align: center;
   text-shadow: 1px 1px 1px black;
-  background-color: #02588a;
+  background-color: $base-color;
   width: 100%;
   color: white;
   padding: 20px 0;
@@ -28,31 +30,41 @@ body {
 
   form {
     width: 50%;
-    padding-bottom: 10px;
+    border-radius: 20px;
+    padding: 50px;
     margin: 20px auto;
-    border-bottom: 1px ridge rgb(142, 185, 185);
+    border: 1px ridge rgb(142, 185, 185);
 
     & > div {
       display: grid;
-      grid-template-columns: auto auto;
-      margin-bottom: 20px;
+      grid-template-rows: auto;
       align-items: center;
+      align-content: center;
+      justify-content: center;
 
       label {
-        text-align: right;
-        padding-right: 20px;
+        margin-bottom: 20px;
       }
 
       input[type="text"] {
-        margin-left: 20px;
-        padding: 10px;
+        margin: 20px auto;
+        width: 30%;
+        // padding: 10px;
         border-radius: 5px;
-        border: 1px solid #02588a;
-        background-color: transparent;
+        border: 1px solid $base-color;
+        // background-color: transparent;
+        background-image: url("../images/searchicon.png");
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
 
         &:focus,
-        &:active {
-          outline-color: #02588a;
+        &:active,
+        &:hover {
+          outline-color: $base-color;
+          width: 100%;
         }
       }
     }
@@ -62,22 +74,21 @@ body {
       margin: 10px auto;
       display: block;
       border-radius: 5px;
-      border: 1px solid #02588a;
+      border: 1px solid $base-color;
       background-color: transparent;
-      background-color: #02588a;
+      background-color: $base-color;
       height: 40px;
       width: 100px;
       color: #fff;
       font-weight: bold;
+      transition: 0.25s;
 
       &:hover,
       &:active,
       &:focus {
-        border: 1px solid #5abdf7;
-        outline-color: #5abdf7;
-        color: #000;
-        background-color: #5abdf7;
-        cursor: pointer;
+        background-color: #0f2c3d;
+        box-shadow: 0 0.5em 0.5em -0.4em $base-color;
+        transform: translateY(-0.25em);
       }
     }
   }
@@ -116,6 +127,118 @@ body {
       flex: 0 0 100%;
     }
   }
+}
+
+#specificMovie,
+#specificTv {
+  .movieTitle {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & > div {
+      width: 45%;
+
+      .ended {
+        text-transform: uppercase;
+        color: rgb(245, 0, 0);
+        font-weight: bold;
+      }
+
+      & > img,
+      & > time,
+      & > a {
+        display: block;
+        width: auto;
+        margin: 10px auto;
+      }
+
+      & > a {
+        text-decoration: none;
+        color: #000;
+
+        a:hover {
+          color: $base-color;
+        }
+      }
+    }
+
+    & > div > div {
+      padding: 10px;
+
+      & > p {
+        font-weight: bold;
+      }
+      span::after {
+        content: ", ";
+      }
+      span:last-child::after {
+        content: "";
+      }
+    }
+  }
+}
+
+#specificTv {
+  .bold {
+    font-weight: bold;
+  }
+
+  .more-info > * {
+    border-bottom: 1px solid $base-color;
+    padding: 10px 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .seasons {
+    border-top: 1px solid $base-color;
+    margin: 20px auto;
+    padding-top: 20px;
+    width: 90%;
+
+    p {
+      width: 100%;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      justify-content: center;
+      align-items: center;
+
+      li {
+        margin: 10px 30px;
+
+        img {
+          height: 260px;
+        }
+      }
+    }
+  }
+}
+
+.back {
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background-color: $base-color;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 @media only screen and (max-width: 768px) {
