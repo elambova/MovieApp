@@ -16,52 +16,54 @@ function Person(props) {
   };
 
   return (
-    <div className="content" id="specificPerson">
-      <Link className="back" to="/result">
+    <React.Fragment>
+      <Link className="back result" to="/result">
         &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
       <Link className="back" to="/" onClick={backToHome}>
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
-      <h2 className="person-name">{apiData.name}</h2>
-      <div>
+      <div className="content" id="specificPerson">
+        <h2 className="person-name">{apiData.name}</h2>
         <div>
-          {apiData.profile_path !== null && (
-            <img
-              src={`${secure_url}w500${apiData.profile_path}`}
-              alt={apiData.name}
-            />
-          )}
-        </div>
-        <div className="more-info">
-          <time className="bold" datatype={apiData.birthday}>
-            Birthday: {apiData.birthday}
-          </time>
-          {apiData.deathday !== null && (
-            <time className="bold" datatype={apiData.deathday}>
-              Deathday: {apiData.deathday}
+          <div>
+            {apiData.profile_path !== null && (
+              <img
+                src={`${secure_url}w500${apiData.profile_path}`}
+                alt={apiData.name}
+              />
+            )}
+          </div>
+          <div className="more-info">
+            <time className="bold" datatype={apiData.birthday}>
+              Birthday: {apiData.birthday}
             </time>
-          )}
-          <p className="bold" datatype={apiData.known_for_department}>
-            Known for department: {apiData.known_for_department}
-          </p>
-          <p className="bold" datatype={apiData.place_of_birth}>
-            Place of birth: {apiData.place_of_birth}
-          </p>
-          {apiData.homepage !== null && apiData.homepage.length > 0 && (
-            <a className="bold" href={apiData.homepage}>
-              {apiData.name}
-            </a>
-          )}
-          {apiData.biography !== null && (
-            <div>
-              <p>Biography:</p>
-              <span>{apiData.biography}</span>
-            </div>
-          )}
+            {apiData.deathday !== null && (
+              <time className="bold" datatype={apiData.deathday}>
+                Deathday: {apiData.deathday}
+              </time>
+            )}
+            <p className="bold" datatype={apiData.known_for_department}>
+              Known for department: {apiData.known_for_department}
+            </p>
+            <p className="bold" datatype={apiData.place_of_birth}>
+              Place of birth: {apiData.place_of_birth}
+            </p>
+            {apiData.homepage !== null && apiData.homepage.length > 0 && (
+              <a className="bold" href={apiData.homepage}>
+                {apiData.name}
+              </a>
+            )}
+            {apiData.biography !== null && (
+              <div>
+                <p>Biography:</p>
+                <span>{apiData.biography}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
