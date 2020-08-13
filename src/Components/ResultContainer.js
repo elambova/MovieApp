@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Movies from "./results/Movies";
 import People from "./results/People";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function ResultContainer(props) {
   const {
@@ -84,9 +84,9 @@ function ResultContainer(props) {
   return (
     <div className="content">
       <div className="flex-container">
-        <button className="back" onClick={backToHome}>
-          &laquo;
-        </button>
+        <Link className="back" to="/" onClick={backToHome}>
+          &laquo; Back To Home
+        </Link>
         {dataLenght > 0 &&
           renderComponentsByMediaType(
             data,
