@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Movies from "./results/Movies";
 import People from "./results/People";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 function ResultContainer(props) {
   const {
@@ -40,6 +42,8 @@ function ResultContainer(props) {
           <People
             secure_url={secure_url}
             handleClickPerson={handleClickPerson}
+            handleClickMovie={handleClickMovie}
+            handleClickTv={handleClickTv}
             people={people}
           />
           <Movies
@@ -83,10 +87,10 @@ function ResultContainer(props) {
 
   return (
     <div className="content">
+      <Link className="back" to="/" onClick={backToHome}>
+        &laquo; <FontAwesomeIcon icon={faHome} />
+      </Link>
       <div className="flex-container">
-        <Link className="back" to="/" onClick={backToHome}>
-          &laquo; Back To Home
-        </Link>
         {dataLenght > 0 &&
           renderComponentsByMediaType(
             data,
