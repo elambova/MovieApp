@@ -90,7 +90,7 @@ const tvApiIdSearch = async (id) => {
     console.error(error);
   }
 };
-const resonApiIdSearch = async (id) => {
+const personApiIdSearch = async (id) => {
   const dataMovie = await fetch(
     `https://api.themoviedb.org/3/person/${id}?api_key=${key.movieApi}&language=en-US`
   );
@@ -179,24 +179,20 @@ app.get("/getDataPerson", async (req, res, next) => {
   try {
     const config = await apiConfiguration();
     const connectApi = await personApiIdSearch(req.query.id);
-    // const imagesUrl = config.images.secure_base_url;
-    // const apiData = {
-    //   id: connectApi.id,
-    //   original_title: connectApi.original_title,
-    //   overview: connectApi.overview,
-    //   poster_path: connectApi.poster_path,
-    //   production_companies: connectApi.production_companies,
-    //   production_countries: connectApi.production_countries,
-    //   release_date: connectApi.release_date,
-    //   status: connectApi.status,
-    //   title: connectApi.title,
-    //   spoken_languages: connectApi.spoken_languages,
-    //   genres: connectApi.genres,
-    //   homepage: connectApi.homepage,
-    // };
+    const imagesUrl = config.images.secure_base_url;
+    const apiData = {
+      id: connectApi.id,
+      birthday: connectApi.birthday,
+      name: connectApi.name,
+      known_for_department: connectApi.known_for_department,
+      deathday: connectApi.deathday,
+      biography: connectApi.biography,
+      place_of_birth: connectApi.place_of_birth,
+      profile_path: connectApi.profile_path,
+      homepage: connectApi.homepage,
+    };
 
-    // res.send({ imagesUrl, apiData });
-    res.send({ connectApi });
+    res.send({ imagesUrl, apiData });
   } catch (error) {
     console.log(error);
   }
