@@ -1,15 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, useHistory } from "react-router-dom";
 
 function Movie(props) {
   const { movie } = props;
   const apiData = movie.apiData;
   const secure_url = movie.imagesUrl;
+  let history = useHistory();
+
+  const backToHome = () => {
+    handleClickReferrer();
+    history.push("/");
+  };
 
   return (
     <div className="content" id="specificMovie">
       <Link className="back" to="/result">
-        &laquo;
+        &laquo; Back To Results
+      </Link>
+      <Link className="back" to="/" onClick={backToHome}>
+        &laquo; Back To Home
       </Link>
       <h2 className="movieTitle">
         {apiData.title !== undefined ? apiData.title : apiData.original_title}

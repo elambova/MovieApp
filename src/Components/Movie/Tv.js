@@ -1,16 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Tv(props) {
-  const { tv } = props;
+  const { tv, handleClickReferrer } = props;
   const apiData = tv.apiData;
   const secure_url = tv.imagesUrl;
+  let history = useHistory();
+
+  const backToHome = () => {
+    handleClickReferrer();
+    history.push("/");
+  };
 
   return (
     <div className="content" id="specificTv">
       <Link className="back" to="/result">
-        &laquo;
+        &laquo; Back To Results
+      </Link>
+      <Link className="back" to="/" onClick={backToHome}>
+        &laquo; Back To Home
       </Link>
       <h2 className="movieTitle">
         {apiData.name !== undefined ? apiData.name : apiData.original_name}
