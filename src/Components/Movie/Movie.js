@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
 
 function Movie(props) {
-  const { movie } = props;
+  const { movie, handleClickReferrer } = props;
   const apiData = movie.apiData;
   const secure_url = movie.imagesUrl;
   let history = useHistory();
@@ -16,12 +18,12 @@ function Movie(props) {
   return (
     <div className="content" id="specificMovie">
       <Link className="back" to="/result">
-        &laquo; Back To Results
+        &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
       <Link className="back" to="/" onClick={backToHome}>
-        &laquo; Back To Home
+        &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
-      <h2 className="movieTitle">
+      <h2 className="movie-title">
         {apiData.title !== undefined ? apiData.title : apiData.original_title}
       </h2>
       <div>

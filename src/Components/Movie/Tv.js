@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
 
 function Tv(props) {
   const { tv, handleClickReferrer } = props;
@@ -16,12 +18,12 @@ function Tv(props) {
   return (
     <div className="content" id="specificTv">
       <Link className="back" to="/result">
-        &laquo; Back To Results
+        &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
       <Link className="back" to="/" onClick={backToHome}>
-        &laquo; Back To Home
+        &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
-      <h2 className="movieTitle">
+      <h2 className="tv-title">
         {apiData.name !== undefined ? apiData.name : apiData.original_name}
       </h2>
       <div>
