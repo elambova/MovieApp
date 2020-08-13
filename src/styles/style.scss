@@ -49,7 +49,6 @@ body {
       input[type="text"] {
         margin: 20px auto;
         width: 30%;
-        // padding: 10px;
         border-radius: 5px;
         border: 1px solid $base-color;
         background-color: #fff;
@@ -138,21 +137,35 @@ body {
       }
     }
   }
-  a.back {
-    border: none;
-    height: auto;
-    display: inline-block;
-    padding: 8px 16px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-decoration: none;
-    color: #fff;
-    background-color: $base-color;
-    text-align: center;
-    cursor: pointer;
-    white-space: nowrap;
-    margin: -230px 20px 0 0;
+}
+a.back {
+  border: 1px solid #0f2c3d;
+  height: auto;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background-color: $base-color;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  margin: 0 20px;
+  position: absolute;
+  top: 5%;
+  transition: 0.25s;
+
+  &:hover {
+    background-color: #0f2c3d;
+    box-shadow: 0 0.5em 0.5em -0.4em #fff;
+    transform: translateY(-0.25em);
   }
+}
+
+a.back.result {
+  left: 5%;
 }
 
 #specificMovie,
