@@ -34,7 +34,7 @@ function Movies(props) {
               <Link
                 key={movie.id}
                 id={movie.id}
-                className={movie.media_type}
+                className="link"
                 to={`/movie/${movie.id}`}
                 onClick={() => clickMovie(movie.id)}
               >
@@ -49,7 +49,7 @@ function Movies(props) {
               <Link
                 key={movie.id}
                 id={movie.id}
-                className={movie.media_type}
+                className="link"
                 to={`/tv/${movie.id}`}
                 onClick={() => clickTv(movie.id)}
               >
