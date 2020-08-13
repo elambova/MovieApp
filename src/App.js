@@ -129,7 +129,6 @@ class App extends Component {
                     />
                   </React.Fragment>
                 )}
-                <Route component={NotFound} />
               </React.Fragment>
             </Switch>
           )}
