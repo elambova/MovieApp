@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import Form from "../Form";
+import { Link } from "react-router-dom";
 
 function Movies(props) {
   const {
@@ -30,16 +29,14 @@ function Movies(props) {
       {moviesLenght > 0 &&
         movies.map(
           (movie) =>
-            movie.poster_path !== null && (
-              <div
+            movie.poster_path !== null &&
+            (movie.media_type === "movie" ? (
+              <Link
                 key={movie.id}
                 id={movie.id}
                 className={movie.media_type}
-                onClick={() =>
-                  movie.media_type === "movie"
-                    ? clickMovie(movie.id)
-                    : clickTv(movie.id)
-                }
+                to={`/movie/${movie.id}`}
+                onClick={() => clickMovie(movie.id)}
               >
                 <p>
                   {movie.title !== undefined
@@ -47,8 +44,23 @@ function Movies(props) {
                     : movie.original_name}
                 </p>
                 <img src={`${secure_url}${movie.poster_path}`} />
-              </div>
-            )
+              </Link>
+            ) : (
+              <Link
+                key={movie.id}
+                id={movie.id}
+                className={movie.media_type}
+                to={`/tv/${movie.id}`}
+                onClick={() => clickTv(movie.id)}
+              >
+                <span>
+                  {movie.title !== undefined
+                    ? movie.title
+                    : movie.original_name}
+                </span>
+                <img src={`${secure_url}${movie.poster_path}`} />
+              </Link>
+            ))
         )}
     </React.Fragment>
   );
