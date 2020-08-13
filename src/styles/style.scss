@@ -52,7 +52,7 @@ body {
         // padding: 10px;
         border-radius: 5px;
         border: 1px solid $base-color;
-        // background-color: transparent;
+        background-color: #fff;
         background-image: url("../images/searchicon.png");
         background-position: 10px 10px;
         background-repeat: no-repeat;
@@ -62,7 +62,8 @@ body {
 
         &:focus,
         &:active,
-        &:hover {
+        &:hover,
+        &:-webkit-autofill {
           outline-color: $base-color;
           width: 100%;
         }
@@ -104,15 +105,17 @@ body {
     align-content: center;
     align-items: center;
 
-    & > div {
+    & > a {
+      display: block;
       width: 200px;
       height: 360px;
       margin: 10px;
       text-align: center;
-      cursor: pointer;
+      color: #000000;
+      text-decoration: none;
 
-      & > p {
-        display: flex;
+      & > span {
+        display: block;
         align-items: center;
         justify-content: center;
         height: 100px;
@@ -126,6 +129,24 @@ body {
     & > #person-info {
       flex: 0 0 100%;
     }
+  }
+  a.back {
+    border: none;
+    height: auto;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    background-color: $base-color;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-right: 20px;
+    position: absolute;
+    top: 5%;
+    left: 10%;
   }
 }
 
@@ -225,20 +246,6 @@ body {
       }
     }
   }
-}
-
-.back {
-  border: none;
-  display: inline-block;
-  padding: 8px 16px;
-  vertical-align: middle;
-  overflow: hidden;
-  text-decoration: none;
-  color: #fff;
-  background-color: $base-color;
-  text-align: center;
-  cursor: pointer;
-  white-space: nowrap;
 }
 
 @media only screen and (max-width: 768px) {
