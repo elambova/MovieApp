@@ -13,6 +13,7 @@ import ResultContainer from "./Components/ResultContainer";
 import Movie from "./Components/Movie/Movie";
 import Tv from "./Components/Movie/Tv";
 import Person from "./Components/Movie/Person";
+import NotFound from "./Components/NotFound";
 
 class App extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class App extends Component {
 
   render() {
     const { data, movie, tv, person, redirectToReferrer } = this.state;
+
     return (
       <Router>
         <React.Fragment>
@@ -117,7 +119,7 @@ class App extends Component {
                   <React.Fragment>
                     <Route
                       exact
-                      path={`/person/${person.connectApi.id}`}
+                      path={`/person/${person.apiData.id}`}
                       render={() => (
                         <Person
                           person={person}
@@ -127,6 +129,7 @@ class App extends Component {
                     />
                   </React.Fragment>
                 )}
+                <Route component={NotFound} />
               </React.Fragment>
             </Switch>
           )}
