@@ -58,14 +58,14 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <Header />
-          <Switch>
-            {!redirectToReferrer ? (
-              <Route
-                exact
-                path="/"
-                render={() => <Form handleSubmit={this.handleSubmit} />}
-              />
-            ) : (
+          {!redirectToReferrer ? (
+            <Route
+              exact
+              path="/"
+              render={() => <Form handleSubmit={this.handleSubmit} />}
+            />
+          ) : (
+            <Switch>
               <React.Fragment>
                 {Object.values(data).length > 0 && (
                   <React.Fragment>
@@ -87,40 +87,49 @@ class App extends Component {
                 )}
                 {Object.values(movie).length > 0 && (
                   <React.Fragment>
-                    <Redirect from="/result" to={`movie/${movie.apiData.id}`} />
                     <Route
                       exact
                       path={`/movie/${movie.apiData.id}`}
-                      render={() => <Movie movie={movie} />}
+                      render={() => (
+                        <Movie
+                          movie={movie}
+                          handleClickReferrer={this.handleClickReferrer}
+                        />
+                      )}
                     />
                   </React.Fragment>
                 )}
                 {Object.values(tv).length > 0 && (
                   <React.Fragment>
-                    <Redirect from="/result" to={`tv/${tv.apiData.id}`} />
                     <Route
                       exact
                       path={`/tv/${tv.apiData.id}`}
-                      render={() => <Tv tv={tv} />}
+                      render={() => (
+                        <Tv
+                          tv={tv}
+                          handleClickReferrer={this.handleClickReferrer}
+                        />
+                      )}
                     />
                   </React.Fragment>
                 )}
                 {Object.values(person).length > 0 && (
                   <React.Fragment>
-                    <Redirect
-                      from="/result"
-                      to={`person/${person.connectApi.id}`}
-                    />
                     <Route
                       exact
                       path={`/person/${person.connectApi.id}`}
-                      render={() => <Person person={person} />}
+                      render={() => (
+                        <Person
+                          person={person}
+                          handleClickReferrer={this.handleClickReferrer}
+                        />
+                      )}
                     />
                   </React.Fragment>
                 )}
               </React.Fragment>
-            )}
-          </Switch>
+            </Switch>
+          )}
           <Footer />
         </React.Fragment>
       </Router>
