@@ -86,20 +86,22 @@ function ResultContainer(props) {
   };
 
   return (
-    <div className="content">
+    <React.Fragment>
       <Link className="back" to="/" onClick={backToHome}>
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
-      <div className="flex-container">
-        {dataLenght > 0 &&
-          renderComponentsByMediaType(
-            data,
-            handleClickMovie,
-            handleClickTv,
-            handleClickPerson
-          )}
+      <div className="content">
+        <div className="flex-container">
+          {dataLenght > 0 &&
+            renderComponentsByMediaType(
+              data,
+              handleClickMovie,
+              handleClickTv,
+              handleClickPerson
+            )}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
