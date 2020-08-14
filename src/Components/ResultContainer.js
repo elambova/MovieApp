@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Movies from "./results/Movies";
 import People from "./results/People";
+import NotFound from "./NotFound";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +15,14 @@ function ResultContainer(props) {
     handleClickPerson,
     handleClickReferrer,
   } = props;
+  const dataLenght = Object.values(data).length;
+
+  let history = useHistory();
+
+  const backToHome = () => {
+    handleClickReferrer();
+    history.push("/");
+  };
 
   const renderComponentsByMediaType = (
     data,
@@ -68,21 +77,14 @@ function ResultContainer(props) {
         <People
           secure_url={secure_url}
           handleClickPerson={handleClickPerson}
+          handleClickMovie={handleClickMovie}
+          handleClickTv={handleClickTv}
           people={people}
         />
       );
     } else {
-      return <h3>No results found for your search!</h3>;
+      return <NotFound handleClickReferrer={handleClickReferrer} />;
     }
-  };
-
-  const dataLenght = Object.values(data).length;
-
-  let history = useHistory();
-
-  const backToHome = () => {
-    handleClickReferrer();
-    history.push("/");
   };
 
   return (
