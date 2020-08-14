@@ -13,6 +13,7 @@ import ResultContainer from "./Components/ResultContainer";
 import Movie from "./Components/Movie/Movie";
 import Tv from "./Components/Movie/Tv";
 import Person from "./Components/Movie/Person";
+import Loader from "react-loader-spinner";
 
 class App extends Component {
   constructor(props) {
@@ -23,28 +24,44 @@ class App extends Component {
       tv: [],
       person: [],
       redirectToReferrer: false,
+      loading: false,
+      loadingMovie: false,
+      loadingTv: false,
+      loadingPerson: false,
     };
   }
-  handleSubmit = async (data) => {
-    await connect.getData(data).then((data) => {
-      this.setState({ data: data, redirectToReferrer: true });
+  handleSubmit = (data) => {
+    this.setState({ loading: true, redirectToReferrer: true }, async () => {
+      await connect.getData(data).then((data) => {
+        this.setState({ data: data, loading: false });
+      });
     });
   };
 
-  handleClickMovie = async (id) => {
-    await connect
-      .getDataMovie(id)
-      .then((movie) => this.setState({ movie: movie }));
+  handleClickMovie = (id) => {
+    this.setState({ loadingMovie: true }, async () => {
+      await connect
+        .getDataMovie(id)
+        .then((movie) => this.setState({ movie: movie, loadingMovie: false }));
+    });
   };
 
-  handleClickTv = async (id) => {
-    await connect.getDataTv(id).then((tv) => this.setState({ tv: tv }));
+  handleClickTv = (id) => {
+    this.setState({ loadingTv: true }, async () => {
+      await connect
+        .getDataTv(id)
+        .then((tv) => this.setState({ tv: tv, loadingTv: false }));
+    });
   };
 
-  handleClickPerson = async (id) => {
-    await connect
-      .getDataPerson(id)
-      .then((person) => this.setState({ person: person }));
+  handleClickPerson = (id) => {
+    this.setState({ loadingPerson: true }, async () => {
+      await connect
+        .getDataPerson(id)
+        .then((person) =>
+          this.setState({ person: person, loadingPerson: false })
+        );
+    });
   };
 
   handleClickReferrer = () => {
@@ -52,7 +69,17 @@ class App extends Component {
   };
 
   render() {
-    const { data, movie, tv, person, redirectToReferrer } = this.state;
+    const {
+      data,
+      movie,
+      tv,
+      person,
+      redirectToReferrer,
+      loading,
+      loadingMovie,
+      loadingTv,
+      loadingPerson,
+    } = this.state;
 
     return (
       <Router>
@@ -67,62 +94,102 @@ class App extends Component {
           ) : (
             <Switch>
               <React.Fragment>
-                {Object.values(data).length > 0 && (
-                  <React.Fragment>
-                    <Redirect to="/result" />
-                    <Route
-                      exact
-                      path="/result"
-                      render={() => (
-                        <ResultContainer
-                          handleClickMovie={this.handleClickMovie}
-                          handleClickTv={this.handleClickTv}
-                          handleClickPerson={this.handleClickPerson}
-                          handleClickReferrer={this.handleClickReferrer}
-                          data={data}
-                        />
-                      )}
-                    />
-                  </React.Fragment>
+                {loading ? (
+                  <Loader
+                    className="loader"
+                    type="ThreeDots"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(data).length > 0 && (
+                    <React.Fragment>
+                      <Redirect to="/result" />
+                      <Route
+                        exact
+                        path="/result"
+                        render={() => (
+                          <ResultContainer
+                            handleClickMovie={this.handleClickMovie}
+                            handleClickTv={this.handleClickTv}
+                            handleClickPerson={this.handleClickPerson}
+                            handleClickReferrer={this.handleClickReferrer}
+                            data={data}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
                 )}
-                {Object.values(movie).length > 0 && (
-                  <React.Fragment>
-                    <Route
-                      path={`/movie/${movie.apiData.id}`}
-                      render={() => (
-                        <Movie
-                          movie={movie}
-                          handleClickReferrer={this.handleClickReferrer}
-                        />
-                      )}
-                    />
-                  </React.Fragment>
+                {loadingMovie ? (
+                  <Loader
+                    className="loader"
+                    type="Rings"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(movie).length > 0 && (
+                    <React.Fragment>
+                      <Route
+                        path={`/movie/${movie.apiData.id}`}
+                        render={() => (
+                          <Movie
+                            movie={movie}
+                            handleClickReferrer={this.handleClickReferrer}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
                 )}
-                {Object.values(tv).length > 0 && (
-                  <React.Fragment>
-                    <Route
-                      path={`/tv/${tv.apiData.id}`}
-                      render={() => (
-                        <Tv
-                          tv={tv}
-                          handleClickReferrer={this.handleClickReferrer}
-                        />
-                      )}
-                    />
-                  </React.Fragment>
+                {loadingTv ? (
+                  <Loader
+                    className="loader"
+                    type="Oval"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(tv).length > 0 && (
+                    <React.Fragment>
+                      <Route
+                        path={`/tv/${tv.apiData.id}`}
+                        render={() => (
+                          <Tv
+                            tv={tv}
+                            handleClickReferrer={this.handleClickReferrer}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
                 )}
-                {Object.values(person).length > 0 && (
-                  <React.Fragment>
-                    <Route
-                      path={`/person/${person.apiData.id}`}
-                      render={() => (
-                        <Person
-                          person={person}
-                          handleClickReferrer={this.handleClickReferrer}
-                        />
-                      )}
-                    />
-                  </React.Fragment>
+                {loadingPerson ? (
+                  <Loader
+                    className="loader"
+                    type="Bars"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(person).length > 0 && (
+                    <React.Fragment>
+                      <Route
+                        path={`/person/${person.apiData.id}`}
+                        render={() => (
+                          <Person
+                            person={person}
+                            handleClickReferrer={this.handleClickReferrer}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
                 )}
               </React.Fragment>
             </Switch>
