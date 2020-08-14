@@ -134,6 +134,7 @@ body {
       }
       & > img {
         height: 260px;
+        width: 175px;
       }
     }
   }
@@ -161,6 +162,28 @@ a.back {
     background-color: #0f2c3d;
     box-shadow: 0 0.5em 0.5em -0.4em #fff;
     transform: translateY(-0.25em);
+  }
+}
+
+a.back-link {
+  color: $base-color;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  text-shadow: 0 0 0 #0f2c3d;
+  -webkit-animation: pulse 1.5s infinite;
+  animation: pulse 1.5s infinite;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &:hover {
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  to {
+    text-shadow: 0 0 45px #02588a;
   }
 }
 
