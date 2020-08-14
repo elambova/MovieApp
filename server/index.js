@@ -25,7 +25,30 @@ app.get("/", function (req, res) {
   //   res.sendFile("build/index.html");
 
   // for development
-  res.sendFile(path.resolve("public/index.html"));
+  res.sendFile(path.resolve("dist/index.html"));
+});
+
+app.get("/result", function (req, res) {
+  res.redirect("/");
+});
+
+app.get("/tv/*", function (req, res) {
+  res.redirect("/");
+});
+
+app.get("/movie/*", function (req, res) {
+  res.redirect("/");
+});
+
+app.get("/person/*", function (req, res) {
+  res.redirect("/");
+});
+
+app.use(function (req, res, next) {
+  if (req.originalUrl && req.originalUrl.split("/").pop().includes("favicon")) {
+    return res.sendStatus(204);
+  }
+  return next();
 });
 
 // designates what port the app will listen to for incoming requests
