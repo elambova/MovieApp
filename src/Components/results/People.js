@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import noPhotoFound from "../../images/noPhotoFound.png";
 
 function People(props) {
   const {
@@ -10,6 +11,7 @@ function People(props) {
     handleClickMovie,
     handleClickTv,
   } = props;
+
   const peopleLenght = people.length;
 
   const clickPerson = (id) => {
@@ -19,9 +21,7 @@ function People(props) {
   };
 
   const clickMovie = (id) => {
-    if (handleClickMovie) {
-      handleClickMovie(id);
-    }
+    handleClickMovie(id);
   };
 
   const clickTv = (id) => {
@@ -47,31 +47,40 @@ function People(props) {
       {peopleLenght > 0 &&
         people[0].known_for.length > 0 &&
         people.map((person) =>
-          person.known_for.map(
-            (movie) =>
-              movie.poster_path !== null &&
-              movie.poster_path !== undefined &&
-              (movie.media_type === "movie" ? (
-                <Link
-                  className="link"
-                  to={`/movie/${movie.id}`}
-                  key={movie.id}
-                  onClick={() => clickMovie(movie.id)}
-                >
-                  <p>{movie.title ? movie.title : movie.original_name}</p>
-                  <img src={`${secure_url}${movie.poster_path}`} />
-                </Link>
-              ) : (
-                <Link
-                  className="link"
-                  to={`/tv/${movie.id}`}
-                  key={movie.id}
-                  onClick={() => clickTv(movie.id)}
-                >
-                  <p>{movie.title ? movie.title : movie.original_name}</p>
-                  <img src={`${secure_url}${movie.poster_path}`} />
-                </Link>
-              ))
+          person.known_for.map((movie) =>
+            movie.media_type === "movie" ? (
+              <Link
+                className="link"
+                to={`/movie/${movie.id}`}
+                key={movie.id}
+                onClick={() => clickMovie(movie.id)}
+              >
+                <p>{movie.title ? movie.title : movie.original_name}</p>
+                <img
+                  src={
+                    movie.poster_path === null
+                      ? `${noPhotoFound}`
+                      : `${secure_url}${movie.poster_path}`
+                  }
+                />
+              </Link>
+            ) : (
+              <Link
+                className="link"
+                to={`/tv/${movie.id}`}
+                key={movie.id}
+                onClick={() => clickTv(movie.id)}
+              >
+                <p>{movie.title ? movie.title : movie.original_name}</p>
+                <img
+                  src={
+                    movie.poster_path === null
+                      ? `${noPhotoFound}`
+                      : `${secure_url}${movie.poster_path}`
+                  }
+                />
+              </Link>
+            )
           )
         )}
     </React.Fragment>
