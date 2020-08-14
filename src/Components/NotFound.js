@@ -1,11 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Link, useHistory } from "react-router-dom";
 
-const NotFound = () => (
-  <div>
-    <h1>404 - Not Found!</h1>
-    <Link to="/">Go Home</Link>
-  </div>
-);
+const NotFound = (props) => {
+  let history = useHistory();
+
+  const backToHome = () => {
+    props.handleClickReferrer();
+    history.push("/");
+  };
+
+  return (
+    <div>
+      <h1>
+        No search results! Please go to the{" "}
+        <Link to="/" className="back-link" onClick={backToHome}>
+          homepage
+        </Link>{" "}
+        for a new search!
+      </h1>
+    </div>
+  );
+};
+
+NotFound.propTypes = {};
 
 export default NotFound;
