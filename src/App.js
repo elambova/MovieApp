@@ -13,7 +13,6 @@ import ResultContainer from "./Components/ResultContainer";
 import Movie from "./Components/Movie/Movie";
 import Tv from "./Components/Movie/Tv";
 import Person from "./Components/Movie/Person";
-import NotFound from "./Components/NotFound";
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class App extends Component {
       redirectToReferrer: false,
     };
   }
-
   handleSubmit = async (data) => {
     await connect.getData(data).then((data) => {
       this.setState({ data: data, redirectToReferrer: true });
@@ -71,7 +69,7 @@ class App extends Component {
               <React.Fragment>
                 {Object.values(data).length > 0 && (
                   <React.Fragment>
-                    <Redirect from="/" to="/result" />
+                    <Redirect to="/result" />
                     <Route
                       exact
                       path="/result"
@@ -90,7 +88,6 @@ class App extends Component {
                 {Object.values(movie).length > 0 && (
                   <React.Fragment>
                     <Route
-                      exact
                       path={`/movie/${movie.apiData.id}`}
                       render={() => (
                         <Movie
@@ -104,7 +101,6 @@ class App extends Component {
                 {Object.values(tv).length > 0 && (
                   <React.Fragment>
                     <Route
-                      exact
                       path={`/tv/${tv.apiData.id}`}
                       render={() => (
                         <Tv
@@ -118,7 +114,6 @@ class App extends Component {
                 {Object.values(person).length > 0 && (
                   <React.Fragment>
                     <Route
-                      exact
                       path={`/person/${person.apiData.id}`}
                       render={() => (
                         <Person
