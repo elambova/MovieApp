@@ -292,6 +292,12 @@ a.back.result {
   }
 }
 
+.loader > * {
+  margin: 20px auto;
+  display: block;
+  stroke: $base-color;
+}
+
 @media only screen and (max-width: 768px) {
   .content form {
     width: 90%;
