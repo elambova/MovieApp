@@ -17,10 +17,10 @@ function Movie(props) {
 
   return (
     <React.Fragment>
-      <Link className="back result" to="/result">
+      <Link className="back result" to="/result" title="Back to Results">
         &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
-      <Link className="back" to="/" onClick={backToHome}>
+      <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
       <div className="content" id="specificMovie">
@@ -31,7 +31,7 @@ function Movie(props) {
           <div>
             {apiData.poster_path !== null && (
               <img
-                src={`${secure_url}w342${apiData.poster_path}`}
+                src={`${secure_url}w500${apiData.poster_path}`}
                 alt={
                   apiData.title !== undefined
                     ? apiData.title
@@ -39,25 +39,30 @@ function Movie(props) {
                 }
               />
             )}
-            <time datatype={apiData.release_date}>
+          </div>
+          <div className="more-info">
+            <time className="bold" datatype={apiData.release_date}>
               Release Date: {apiData.release_date}
             </time>
             {apiData.homepage !== null && apiData.homepage.length > 0 && (
-              <a href={apiData.homepage}>
+              <a
+                className="bold"
+                href={apiData.homepage}
+                title={apiData.title || apiData.original_title}
+              >
+                <span>Website: </span>
                 {apiData.title || apiData.original_title}
               </a>
             )}
-          </div>
-          <div>
             {apiData.overview !== null && (
               <div>
-                <p>Overview:</p>
+                <p className="bold">Overview:</p>
                 <span>{apiData.overview}</span>
               </div>
             )}
             {apiData.spoken_languages.length > 0 && (
               <div>
-                <p>Spoken Languages:</p>
+                <p className="bold">Spoken Languages:</p>
                 {apiData.spoken_languages.map((language) => (
                   <span key={language.name}>{language.name}</span>
                 ))}
@@ -65,7 +70,7 @@ function Movie(props) {
             )}
             {apiData.production_countries.length > 0 && (
               <div>
-                <p>Production Countries</p>
+                <p className="bold">Production Countries</p>
                 {apiData.production_countries.map((country) => (
                   <span key={country.iso_3166_1}>{country.name}</span>
                 ))}
@@ -73,7 +78,7 @@ function Movie(props) {
             )}
             {apiData.production_companies.length > 0 && (
               <div className="production_companies">
-                <p>Production Companies:</p>
+                <p className="bold">Production Companies:</p>
                 {apiData.production_companies.map((company) => (
                   <span key={company.id}>{company.name}</span>
                 ))}
@@ -81,7 +86,7 @@ function Movie(props) {
             )}
             {apiData.genres.length > 0 && (
               <div className="genres">
-                <p>Genres:</p>
+                <p className="bold">Genres:</p>
                 {apiData.genres.map((genre) => (
                   <span key={genre.id}>{genre.name}</span>
                 ))}

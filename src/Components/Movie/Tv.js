@@ -17,10 +17,10 @@ function Tv(props) {
 
   return (
     <React.Fragment>
-      <Link className="back result" to="/result">
+      <Link className="back result" to="/result" title="Back to Results">
         &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
-      <Link className="back" to="/" onClick={backToHome}>
+      <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
       <div className="content" id="specificTv">
@@ -56,13 +56,18 @@ function Tv(props) {
               Next Episode Air Date: {apiData.next_episode_to_air}
             </time>
             {apiData.homepage !== null && apiData.homepage.length > 0 && (
-              <a className="bold" href={apiData.homepage}>
+              <a
+                className="bold"
+                href={apiData.homepage}
+                title={apiData.name || apiData.original_name}
+              >
+                <span>Website: </span>
                 {apiData.name || apiData.original_name}
               </a>
             )}
             {apiData.overview !== null && (
               <div>
-                <p>Overview:</p>
+                <p className="bold">Overview:</p>
                 <span>{apiData.overview}</span>
               </div>
             )}
@@ -78,7 +83,7 @@ function Tv(props) {
             )}
             {apiData.created_by.length > 0 && (
               <div>
-                <p>Production Countries</p>
+                <p className="bold">Created By</p>
                 {apiData.created_by.map((created) => (
                   <span key={created.id}>{created.name}</span>
                 ))}
@@ -86,7 +91,7 @@ function Tv(props) {
             )}
             {apiData.origin_country.length > 0 && (
               <div>
-                <p>Production Countries</p>
+                <p className="bold">Production Countries</p>
                 {apiData.origin_country.map((country) => (
                   <span key={country}>{country}</span>
                 ))}
@@ -94,7 +99,7 @@ function Tv(props) {
             )}
             {apiData.production_companies.length > 0 && (
               <div className="production_companies">
-                <p>Production Companies:</p>
+                <p className="bold">Production Companies:</p>
                 {apiData.production_companies.map((company) => (
                   <span key={company.id}>{company.name}</span>
                 ))}
@@ -102,7 +107,7 @@ function Tv(props) {
             )}
             {apiData.genres.length > 0 && (
               <div className="genres">
-                <p>Genres:</p>
+                <p className="bold">Genres:</p>
                 {apiData.genres.map((genre) => (
                   <span key={genre.id}>{genre.name}</span>
                 ))}
@@ -112,17 +117,19 @@ function Tv(props) {
         </div>
         {apiData.seasons.length !== 0 && (
           <div className="seasons">
-            <p>Seasons: </p>
+            <p className="bold">Seasons: </p>
             <ul>
               {apiData.seasons.map((season) => (
                 <li key={season.id} id={season.id}>
-                  <p>{season.name}</p>
-                  {season.poster_path !== null && (
-                    <img
-                      src={`${secure_url}w185${season.poster_path}`}
-                      alt={season.name}
-                    />
-                  )}
+                  <Link to={`/tv/${apiData.id}/season/${season.id}`}>
+                    <p className="bold">{season.name}</p>
+                    {season.poster_path !== null && (
+                      <img
+                        src={`${secure_url}w185${season.poster_path}`}
+                        alt={season.name}
+                      />
+                    )}
+                  </Link>
                 </li>
               ))}
             </ul>

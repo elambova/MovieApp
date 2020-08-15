@@ -17,10 +17,10 @@ function Person(props) {
 
   return (
     <React.Fragment>
-      <Link className="back result" to="/result">
+      <Link className="back result" to="/result" title="Back to Results">
         &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
-      <Link className="back" to="/" onClick={backToHome}>
+      <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
       <div className="content" id="specificPerson">
@@ -56,7 +56,7 @@ function Person(props) {
             )}
             {apiData.biography !== null && (
               <div>
-                <p>Biography:</p>
+                <p className="bold">Biography:</p>
                 <span>{apiData.biography}</span>
               </div>
             )}
