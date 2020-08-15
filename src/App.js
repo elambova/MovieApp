@@ -14,6 +14,9 @@ import Movie from "./Components/Movie/Movie";
 import Tv from "./Components/Movie/Tv";
 import Person from "./Components/Movie/Person";
 import Loader from "react-loader-spinner";
+import ScrollToTop from "react-scroll-to-top";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +31,7 @@ class App extends Component {
       loadingMovie: false,
       loadingTv: false,
       loadingPerson: false,
+      loadingSeason: false,
     };
   }
   handleSubmit = (data) => {
@@ -64,6 +68,16 @@ class App extends Component {
     });
   };
 
+  handleClickSeason = (id) => {
+    this.setState({ loadingSeason: true }, async () => {
+      await connect
+        .getDataSeason(id)
+        .then((season) =>
+          this.setState({ season: season, loadingSeason: false })
+        );
+    });
+  };
+
   handleClickReferrer = () => {
     this.setState({ redirectToReferrer: false });
   };
@@ -74,11 +88,13 @@ class App extends Component {
       movie,
       tv,
       person,
+      season,
       redirectToReferrer,
       loading,
       loadingMovie,
       loadingTv,
       loadingPerson,
+      loadingSeason,
     } = this.state;
 
     return (
@@ -191,10 +207,38 @@ class App extends Component {
                     </React.Fragment>
                   )
                 )}
+                {loadingSeason ? (
+                  <Loader
+                    className="loader"
+                    type="Bars"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(season).length > 0 && (
+                    <React.Fragment>
+                      <Route
+                        path={`/season/${season.apiData.id}`}
+                        render={() => (
+                          <Season
+                            season={season}
+                            handleClickReferrer={this.handleClickReferrer}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
+                )}
               </React.Fragment>
             </Switch>
           )}
           <Footer />
+          <ScrollToTop
+            id="go-top"
+            smooth
+            component={<FontAwesomeIcon icon={faAngleUp} />}
+          />
         </React.Fragment>
       </Router>
     );
