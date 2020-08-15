@@ -64,7 +64,7 @@ body {
         &:hover,
         &:-webkit-autofill {
           outline-color: $base-color;
-          width: 100%;
+          width: 90%;
         }
       }
     }
@@ -248,7 +248,7 @@ a.back.result {
     }
   }
 }
-
+#specificMovie,
 #specificTv,
 #specificPerson {
   .bold {
@@ -298,17 +298,122 @@ a.back.result {
   stroke: $base-color;
 }
 
-@media only screen and (max-width: 768px) {
-  .content form {
-    width: 90%;
+#go-top {
+  border-radius: 50%;
+  background-color: aliceblue;
 
-    & > div {
-      grid-template-columns: none;
+  & > svg {
+    color: $base-color;
+  }
+}
 
-      label {
-        text-align: center;
-        margin-bottom: 10px;
+@media only screen and (max-width: 1024px) {
+  .content form > div {
+    label {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      transition: none;
+      -webkit-transition: none;
+      padding-right: 0;
+      width: 90%;
+
+      &:hover,
+      &:active,
+      &:focus {
+        width: 89%;
       }
     }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .content {
+    padding: 0;
+
+    form {
+      width: 90%;
+      padding: 0;
+
+      & > div {
+        grid-template-columns: none;
+        padding: 50px 50px 0;
+
+        label {
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+      #submit-btn {
+        margin-bottom: 50px;
+      }
+    }
+    .flex-container {
+      a.link {
+        height: 260px;
+        width: 100%;
+        border-bottom: 1px solid $base-color;
+        padding-bottom: 20px;
+        margin: 0 20px;
+
+        & > *:first-child {
+          height: 50px;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        & > img {
+          height: auto;
+          width: 135px;
+        }
+      }
+      & > #person-info {
+        background-color: $base-color;
+        color: #fff;
+        flex: 0 0 95%;
+        margin-bottom: 20px;
+
+        a.link {
+          color: #fff;
+          padding-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  #specificMovie,
+  #specificTv,
+  #specificPerson {
+    .movie-title,
+    .tv-title,
+    .person-name {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+
+    & > div > div {
+      width: 100%;
+
+      & > img {
+        width: 100%;
+      }
+    }
+  }
+
+  a.back {
+    position: static;
+    margin: 10px 0 0 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #header {
+    font-size: 30px;
+  }
+  .content {
+    font-size: 16px;
   }
 }
