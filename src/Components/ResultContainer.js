@@ -89,7 +89,7 @@ function ResultContainer(props) {
 
   return (
     <React.Fragment>
-      <Link className="back" to="/" onClick={backToHome}>
+      <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
       <div className="content">
