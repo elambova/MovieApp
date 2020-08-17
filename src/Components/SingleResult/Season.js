@@ -2,37 +2,36 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faTv } from "@fortawesome/free-solid-svg-icons";
+import noPhotoFound from "../../images/noPhotoFound.png";
 
 function Season(props) {
-  const { season, tvId, handleClickReferrer } = props;
+  const { season, tvId, handleClickReferrer, handleClickEpisode } = props;
   const apiData = season.apiData;
   const secure_url = season.imagesUrl;
   let history = useHistory();
-
-  console.log(apiData, history);
 
   const backToHome = () => {
     handleClickReferrer();
     history.push("/");
   };
 
-  const toggleShow = (e) => {
-    e.target.style.height !== "auto"
-      ? (e.target.style.height = "auto")
-      : (e.target.style.height = "50px");
+  const clickEpisode = (tvId, seasonNumber, episodeNumber) => {
+    if (handleClickEpisode) {
+      handleClickEpisode(tvId, seasonNumber, episodeNumber);
+    }
   };
 
   return (
     <React.Fragment>
       <Link className="back result" to={`/tv/${tvId}`} title="Back to Tv">
-        &laquo; <FontAwesomeIcon icon={faPoll} />
+        &laquo; <FontAwesomeIcon icon={faTv} />
       </Link>
       <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
       </Link>
       <div className="content" id="specificSeason">
-        <h2>{apiData.name}</h2>
+        <h2 className="tv-name">{apiData.name}</h2>
         <div>
           <div>
             {apiData.poster_path !== null && (
@@ -55,30 +54,25 @@ function Season(props) {
           </div>
           {apiData.episodes.length !== 0 && (
             <div className="episodes">
-              <p className="bold">Episodes: </p>
               <ul>
                 {apiData.episodes.map((episode) => (
                   <li key={episode.id} id={episode.id}>
-                    <p className="bold">{episode.name}</p>
-                    {episode.poster_path !== null && (
+                    <Link
+                      to={`/tv/${tvId}/season/${apiData.id}/episode/${episode.episode_number}`}
+                      onClick={() =>
+                        clickEpisode(tvId, apiData.id, episode.episode_number)
+                      }
+                    >
+                      <p className="bold">{episode.name}</p>
                       <img
-                        src={`${secure_url}w185${episode.still_path}`}
+                        src={
+                          episode.poster_path === null
+                            ? `${noPhotoFound}`
+                            : `${secure_url}w300${episode.still_path}`
+                        }
                         alt={episode.name}
                       />
-                    )}
-                    <p>{episode.map((ep) => ep.crew)}</p>
-                    {episode.guest_stars.length > 0 && (
-                      <p>{episode.map((ep) => ep.guest_stars)}</p>
-                    )}
-                    {episode.overview.trim().length > 0 && (
-                      <p
-                        className="toggle-view"
-                        title="Click for more info"
-                        onClick={toggleShow}
-                      >
-                        {episode.overview}
-                      </p>
-                    )}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -92,7 +86,7 @@ function Season(props) {
 
 Season.propTypes = {
   season: PropTypes.object.isRequired,
-  tvId: PropTypes.string.isRequired,
+  tvId: PropTypes.number.isRequired,
   handleClickReferrer: PropTypes.func.isRequired,
 };
 
