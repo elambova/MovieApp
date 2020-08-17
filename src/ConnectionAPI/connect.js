@@ -1,4 +1,4 @@
-const localhost = "http://192.168.1.100:5000/";
+const localhost = "http://localhost:5000/";
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = Math.random().toString(36).substr(-8);
@@ -31,6 +31,16 @@ export const getDataPerson = async (id) =>
 export const getDataSeason = async (tvId, seasonNumber) =>
   await fetch(
     `${localhost}getDataSeason?tvId=${tvId}&seasonNumber=${seasonNumber}`,
+    {
+      headers,
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => data);
+
+export const getDataEpisode = async (tvId, seasonNumber, episodeNumber) =>
+  await fetch(
+    `${localhost}getDataEpisode?tvId=${tvId}&seasonNumber=${seasonNumber}&episodeNumber=${episodeNumber}`,
     {
       headers,
     }
