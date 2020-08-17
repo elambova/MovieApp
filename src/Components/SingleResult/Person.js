@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import noPhotoFound from "../../images/noPhotoFound.png";
 
 function Person(props) {
   const { person, handleClickReferrer } = props;
@@ -18,7 +19,7 @@ function Person(props) {
   return (
     <React.Fragment>
       <Link className="back result" to="/result" title="Back to Results">
-        &laquo; <FontAwesomeIcon icon={faPoll} />
+        &laquo; <FontAwesomeIcon icon={faClipboardList} />
       </Link>
       <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
@@ -27,12 +28,14 @@ function Person(props) {
         <h2 className="person-name">{apiData.name}</h2>
         <div>
           <div>
-            {apiData.profile_path !== null && (
-              <img
-                src={`${secure_url}w500${apiData.profile_path}`}
-                alt={apiData.name}
-              />
-            )}
+            <img
+              src={
+                apiData.profile_path === null
+                  ? `${noPhotoFound}`
+                  : `${secure_url}w500${apiData.profile_path}`
+              }
+              alt={apiData.name}
+            />
           </div>
           <div className="more-info">
             <time className="bold" datatype={apiData.birthday}>

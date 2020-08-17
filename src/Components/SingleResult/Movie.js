@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import noPhotoFound from "../../images/noPhotoFound.png";
 
 function Movie(props) {
   const { movie, handleClickReferrer } = props;
@@ -18,7 +19,7 @@ function Movie(props) {
   return (
     <React.Fragment>
       <Link className="back result" to="/result" title="Back to Results">
-        &laquo; <FontAwesomeIcon icon={faPoll} />
+        &laquo; <FontAwesomeIcon icon={faClipboardList} />
       </Link>
       <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
@@ -29,16 +30,18 @@ function Movie(props) {
         </h2>
         <div>
           <div>
-            {apiData.poster_path !== null && (
-              <img
-                src={`${secure_url}w500${apiData.poster_path}`}
-                alt={
-                  apiData.title !== undefined
-                    ? apiData.title
-                    : apiData.original_title
-                }
-              />
-            )}
+            <img
+              src={
+                apiData.poster_path === null
+                  ? `${noPhotoFound}`
+                  : `${secure_url}w500${apiData.poster_path}`
+              }
+              alt={
+                apiData.title !== undefined
+                  ? apiData.title
+                  : apiData.original_title
+              }
+            />
           </div>
           <div className="more-info">
             <time className="bold" datatype={apiData.release_date}>

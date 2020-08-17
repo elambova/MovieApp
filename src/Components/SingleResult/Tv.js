@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import noPhotoFound from "../../images/noPhotoFound.png";
 
 function Tv(props) {
   const { tv, handleClickSeason, handleClickReferrer } = props;
@@ -24,7 +25,7 @@ function Tv(props) {
   return (
     <React.Fragment>
       <Link className="back result" to="/result" title="Back to Results">
-        &laquo; <FontAwesomeIcon icon={faPoll} />
+        &laquo; <FontAwesomeIcon icon={faClipboardList} />
       </Link>
       <Link className="back" to="/" onClick={backToHome} title="Back to Home">
         &laquo; <FontAwesomeIcon icon={faHome} />
@@ -40,16 +41,18 @@ function Tv(props) {
                 Status: <span className="ended">{apiData.status}</span>
               </p>
             )}
-            {apiData.poster_path !== null && (
-              <img
-                src={`${secure_url}w500${apiData.poster_path}`}
-                alt={
-                  apiData.name !== undefined
-                    ? apiData.name
-                    : apiData.original_name
-                }
-              />
-            )}
+            <img
+              src={
+                apiData.poster_path === null
+                  ? `${noPhotoFound}`
+                  : `${secure_url}w500${apiData.poster_path}`
+              }
+              alt={
+                apiData.name !== undefined
+                  ? apiData.name
+                  : apiData.original_name
+              }
+            />
           </div>
           <div className="more-info">
             <time className="bold" datatype={apiData.first_air_date}>
@@ -125,24 +128,29 @@ function Tv(props) {
           <div className="seasons">
             <p className="bold">Seasons: </p>
             <ul>
-              {apiData.seasons.map((season) => (
-                <li key={season.id} id={season.id}>
-                  <Link
-                    to={`/tv/${apiData.id}/season/${season.season_number}`}
-                    onClick={() =>
-                      clickSeason(apiData.id, season.season_number)
-                    }
-                  >
-                    <p className="bold">{season.name}</p>
-                    {season.poster_path !== null && (
-                      <img
-                        src={`${secure_url}w185${season.poster_path}`}
-                        alt={season.name}
-                      />
-                    )}
-                  </Link>
-                </li>
-              ))}
+              {apiData.seasons.map(
+                (season) =>
+                  season.season_number > 0 && (
+                    <li key={season.id} id={season.id}>
+                      <Link
+                        to={`/tv/${apiData.id}/season/${season.season_number}`}
+                        onClick={() =>
+                          clickSeason(apiData.id, season.season_number)
+                        }
+                      >
+                        <p className="bold">{season.name}</p>
+                        <img
+                          src={
+                            season.poster_path === null
+                              ? `${noPhotoFound}`
+                              : `${secure_url}w185${season.poster_path}`
+                          }
+                          alt={season.name}
+                        />
+                      </Link>
+                    </li>
+                  )
+              )}
             </ul>
           </div>
         )}
