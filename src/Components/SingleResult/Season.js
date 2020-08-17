@@ -25,7 +25,7 @@ function Season(props) {
 
   return (
     <React.Fragment>
-      <Link className="back result" to={`/tv/${tvId}`} title="Back to Results">
+      <Link className="back result" to={`/tv/${tvId}`} title="Back to Tv">
         &laquo; <FontAwesomeIcon icon={faPoll} />
       </Link>
       <Link className="back" to="/" onClick={backToHome} title="Back to Home">
