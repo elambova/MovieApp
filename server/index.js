@@ -113,9 +113,22 @@ const tvApiIdSearch = async (id) => {
     console.error(error);
   }
 };
+
 const personApiIdSearch = async (id) => {
   const dataMovie = await fetch(
     `https://api.themoviedb.org/3/person/${id}?api_key=${key.movieApi}&language=en-US`
+  );
+  try {
+    const data = await dataMovie.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const seasonApiIdSearch = async (tvId, seasonId) => {
+  const dataMovie = await fetch(
+    `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonId}??api_key=${key.movieApi}&language=en-US`
   );
   try {
     const data = await dataMovie.json();
@@ -214,6 +227,19 @@ app.get("/getDataPerson", async (req, res, next) => {
       profile_path: connectApi.profile_path,
       homepage: connectApi.homepage,
     };
+
+    res.send({ imagesUrl, apiData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/getDataSeason", async (req, res, next) => {
+  try {
+    const config = await apiConfiguration();
+    const connectApi = await seasonApiIdSearch(req.query.id);
+    const imagesUrl = config.images.secure_base_url;
+    const apiData = connectApi;
 
     res.send({ imagesUrl, apiData });
   } catch (error) {
