@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPoll } from "@fortawesome/free-solid-svg-icons";
 
 function Tv(props) {
-  const { tv, handleClickReferrer } = props;
+  const { tv, handleClickSeason, handleClickReferrer } = props;
   const apiData = tv.apiData;
   const secure_url = tv.imagesUrl;
   let history = useHistory();
@@ -13,6 +13,12 @@ function Tv(props) {
   const backToHome = () => {
     handleClickReferrer();
     history.push("/");
+  };
+
+  const clickSeason = (tvId, seasonNumber) => {
+    if (handleClickSeason) {
+      handleClickSeason(tvId, seasonNumber);
+    }
   };
 
   return (
@@ -121,7 +127,12 @@ function Tv(props) {
             <ul>
               {apiData.seasons.map((season) => (
                 <li key={season.id} id={season.id}>
-                  <Link to={`/tv/${apiData.id}/season/${season.season_number}`}>
+                  <Link
+                    to={`/tv/${apiData.id}/season/${season.season_number}`}
+                    onClick={() =>
+                      clickSeason(apiData.id, season.season_number)
+                    }
+                  >
                     <p className="bold">{season.name}</p>
                     {season.poster_path !== null && (
                       <img
