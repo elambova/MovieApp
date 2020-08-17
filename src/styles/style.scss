@@ -155,7 +155,8 @@ body {
 #specificPerson {
   .movie-title,
   .tv-title,
-  .person-name {
+  .person-name,
+  .tv-name {
     text-align: center;
     margin-bottom: 20px;
     font-size: 25px;
@@ -218,15 +219,9 @@ body {
     &:last-child {
       border-bottom: none;
     }
-
-    .toggle-view {
-      height: 50px;
-      overflow: hidden;
-    }
   }
 
-  .seasons,
-  .episodes {
+  .seasons {
     border-top: 1px solid $base-color;
     margin: 20px auto;
     padding-top: 20px;
@@ -245,9 +240,50 @@ body {
 
       li {
         margin: 10px 30px;
+        a {
+          color: #000;
+          text-decoration: none;
 
-        img {
-          height: 260px;
+          &:hover {
+            text-decoration: underline;
+          }
+
+          img {
+            height: 260px;
+          }
+        }
+      }
+    }
+  }
+
+  .episodes {
+    border-top: 1px solid $base-color;
+    margin: 20px auto;
+    padding-top: 20px;
+    width: 90%;
+
+    p {
+      width: 100%;
+    }
+
+    ul {
+      list-style-type: none;
+
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid $base-color;
+        padding: 20px 0;
+
+        & > div {
+          width: 45%;
+          margin: 10px auto;
+
+          img {
+            width: auto;
+          }
         }
       }
     }
@@ -283,7 +319,7 @@ a.back {
 
 // Back button to result page
 a.back.result {
-  left: 5%;
+  left: 90px;
 }
 
 // in 404 page link to go to Homepage
@@ -350,6 +386,30 @@ a.back-link {
       }
     }
   }
+
+  #specificMovie,
+  #specificTv,
+  #specificSeason,
+  #specificPerson {
+    .movie-title,
+    .tv-title,
+    .person-name {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+
+    & > div > div {
+      width: 100%;
+
+      & > img {
+        width: 100%;
+      }
+    }
+    .episodes ul li > div {
+      width: 100%;
+      margin: 10px auto;
+    }
+  }
 }
 
 //768px
@@ -405,26 +465,6 @@ a.back-link {
           color: #fff;
           padding-bottom: 20px;
         }
-      }
-    }
-  }
-
-  #specificMovie,
-  #specificTv,
-  #specificSeason,
-  #specificPerson {
-    .movie-title,
-    .tv-title,
-    .person-name {
-      font-size: 20px;
-      margin-bottom: 0;
-    }
-
-    & > div > div {
-      width: 100%;
-
-      & > img {
-        width: 100%;
       }
     }
   }
