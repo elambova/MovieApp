@@ -138,6 +138,18 @@ const seasonApiSearch = async (tvId, seasonNumber) => {
   }
 };
 
+const episodeApiSearch = async (tvId, seasonNumber, episodeNumber) => {
+  const dataMovie = await fetch(
+    `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${key.movieApi}&language=en-US`
+  );
+  try {
+    const data = await dataMovie.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 app.get("/getData", async (req, res, next) => {
   try {
     const config = await apiConfiguration();
@@ -250,6 +262,33 @@ app.get("/getDataSeason", async (req, res, next) => {
       overview: connectApi.overview,
       air_date: connectApi.air_date,
       episodes: connectApi.episodes, //array
+    };
+
+    res.send({ imagesUrl, apiData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/getDataEpisode", async (req, res, next) => {
+  try {
+    const config = await apiConfiguration();
+    const connectApi = await episodeApiSearch(
+      req.query.tvId,
+      req.query.seasonNumber,
+      req.query.episodeNumber
+    );
+    const imagesUrl = config.images.secure_base_url;
+    const apiData = {
+      season_number: connectApi.season_number,
+      id: connectApi.id,
+      name: connectApi.name,
+      still_path: connectApi.still_path,
+      overview: connectApi.overview,
+      air_date: connectApi.air_date,
+      episode_number: connectApi.episode_number,
+      crew: connectApi.crew, //array
+      guest_stars: connectApi.guest_stars, //array
     };
 
     res.send({ imagesUrl, apiData });
