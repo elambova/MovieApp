@@ -1,13 +1,18 @@
+// imported files
 @import "reset.scss";
 
+// variables
 $base-color: #02588a;
 
+// Global
 body {
   font-family: "Lemonada", cursive;
   background-color: aliceblue;
   min-height: 100%;
 }
+// End Global
 
+// Header / Footer
 #header,
 #footer {
   text-align: center;
@@ -18,11 +23,14 @@ body {
   padding: 20px 0;
 }
 
+// Header
 #header {
   font-size: 40px;
   top: 0;
 }
+// End Header / Footer
 
+// Content
 .content {
   margin: 10px auto;
   padding: 20px;
@@ -139,60 +147,11 @@ body {
     }
   }
 }
-a.back {
-  border: 1px solid #0f2c3d;
-  height: auto;
-  border-radius: 10px;
-  display: inline-block;
-  padding: 8px 16px;
-  vertical-align: middle;
-  overflow: hidden;
-  text-decoration: none;
-  color: #fff;
-  background-color: $base-color;
-  text-align: center;
-  cursor: pointer;
-  white-space: nowrap;
-  margin: 0 20px;
-  position: absolute;
-  top: 5%;
-  transition: 0.25s;
 
-  &:hover {
-    background-color: #0f2c3d;
-    box-shadow: 0 0.5em 0.5em -0.4em #fff;
-    transform: translateY(-0.25em);
-  }
-}
-
-a.back-link {
-  color: $base-color;
-  text-decoration: none;
-  cursor: pointer;
-  display: inline-block;
-  text-shadow: 0 0 0 #0f2c3d;
-  -webkit-animation: pulse 1.5s infinite;
-  animation: pulse 1.5s infinite;
-  text-transform: uppercase;
-  font-weight: bold;
-
-  &:hover {
-    animation: none;
-  }
-}
-
-@keyframes pulse {
-  to {
-    text-shadow: 0 0 45px #02588a;
-  }
-}
-
-a.back.result {
-  left: 5%;
-}
-
+// Specials containers for diferent results
 #specificMovie,
 #specificTv,
+#specificSeason,
 #specificPerson {
   .movie-title,
   .tv-title,
@@ -247,10 +206,7 @@ a.back.result {
       content: "";
     }
   }
-}
-#specificMovie,
-#specificTv,
-#specificPerson {
+
   .bold {
     font-weight: bold;
   }
@@ -262,9 +218,15 @@ a.back.result {
     &:last-child {
       border-bottom: none;
     }
+
+    .toggle-view {
+      height: 50px;
+      overflow: hidden;
+    }
   }
 
-  .seasons {
+  .seasons,
+  .episodes {
     border-top: 1px solid $base-color;
     margin: 20px auto;
     padding-top: 20px;
@@ -292,12 +254,70 @@ a.back.result {
   }
 }
 
+// Back button for return to Home or Result page
+a.back {
+  border: 1px solid #0f2c3d;
+  height: auto;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background-color: $base-color;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  margin: 0 20px;
+  position: absolute;
+  top: 5%;
+  transition: 0.25s;
+
+  &:hover {
+    background-color: #0f2c3d;
+    box-shadow: 0 0.5em 0.5em -0.4em #fff;
+    transform: translateY(-0.25em);
+  }
+}
+
+// Back button to result page
+a.back.result {
+  left: 5%;
+}
+
+// in 404 page link to go to Homepage
+a.back-link {
+  color: $base-color;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  text-shadow: 0 0 0 #0f2c3d;
+  -webkit-animation: pulse 1.5s infinite;
+  animation: pulse 1.5s infinite;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &:hover {
+    animation: none;
+  }
+}
+
+// Animation PULSE in 404 page to go to Homepage
+@keyframes pulse {
+  to {
+    text-shadow: 0 0 45px #02588a;
+  }
+}
+
+// Loaders
 .loader > * {
   margin: 20px auto;
   display: block;
   stroke: $base-color;
 }
 
+// Go to top button
 #go-top {
   border-radius: 50%;
   background-color: aliceblue;
@@ -306,7 +326,10 @@ a.back.result {
     color: $base-color;
   }
 }
+// End Content
 
+// Media queries for screen > of:
+// 1024px
 @media only screen and (max-width: 1024px) {
   .content form > div {
     label {
@@ -328,6 +351,8 @@ a.back.result {
     }
   }
 }
+
+//768px
 @media only screen and (max-width: 768px) {
   .content {
     padding: 0;
@@ -386,6 +411,7 @@ a.back.result {
 
   #specificMovie,
   #specificTv,
+  #specificSeason,
   #specificPerson {
     .movie-title,
     .tv-title,
@@ -409,6 +435,7 @@ a.back.result {
   }
 }
 
+//480px
 @media only screen and (max-width: 480px) {
   #header {
     font-size: 30px;
@@ -417,3 +444,4 @@ a.back.result {
     font-size: 16px;
   }
 }
+// End Media queries
