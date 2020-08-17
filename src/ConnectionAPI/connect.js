@@ -28,7 +28,12 @@ export const getDataPerson = async (id) =>
     .then((res) => res.json())
     .then((data) => data);
 
-export const getDataPerson = async (id) =>
-  await fetch(`${localhost}getDataSeason?id=${id}`, { headers })
+export const getDataSeason = async (tvId, seasonNumber) =>
+  await fetch(
+    `${localhost}getDataSeason?tvId=${tvId}&seasonId=${seasonNumber}`,
+    {
+      headers,
+    }
+  )
     .then((res) => res.json())
     .then((data) => data);
