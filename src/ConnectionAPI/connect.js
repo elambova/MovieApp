@@ -30,7 +30,7 @@ export const getDataPerson = async (id) =>
 
 export const getDataSeason = async (tvId, seasonNumber) =>
   await fetch(
-    `${localhost}getDataSeason?tvId=${tvId}&seasonId=${seasonNumber}`,
+    `${localhost}getDataSeason?tvId=${tvId}&seasonNumber=${seasonNumber}`,
     {
       headers,
     }
