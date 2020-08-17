@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Movies from "./results/Movies";
-import People from "./results/People";
+import Movies from "./AllResults/Movies";
+import People from "./AllResults/People";
 import NotFound from "./NotFound";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
