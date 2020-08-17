@@ -153,6 +153,8 @@ function Tv(props) {
 
 Tv.propTypes = {
   tv: PropTypes.object.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
+  handleClickSeason: PropTypes.func.isRequired,
 };
 
 export default Tv;

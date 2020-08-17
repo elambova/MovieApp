@@ -17,10 +17,11 @@ function Season(props) {
     history.push("/");
   };
 
-  //   const backToTv = () => {
-  //     handleClickReferrer();
-  //     history.goBack();
-  //   };
+  const toggleShow = (e) => {
+    e.target.style.height !== "auto"
+      ? (e.target.style.height = "auto")
+      : (e.target.style.height = "50px");
+  };
 
   return (
     <React.Fragment>
@@ -72,7 +73,8 @@ function Season(props) {
                     {episode.overview.trim().length > 0 && (
                       <p
                         className="toggle-view"
-                        onClick={() => console.log(this)}
+                        title="Click for more info"
+                        onClick={toggleShow}
                       >
                         {episode.overview}
                       </p>
@@ -90,6 +92,8 @@ function Season(props) {
 
 Season.propTypes = {
   season: PropTypes.object.isRequired,
+  tvId: PropTypes.string.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
 };
 
 export default Season;

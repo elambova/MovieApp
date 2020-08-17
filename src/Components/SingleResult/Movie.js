@@ -101,6 +101,7 @@ function Movie(props) {
 
 Movie.propTypes = {
   movie: PropTypes.object.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
 };
 
 export default Movie;

@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 
 const NotFound = (props) => {
+  const { handleClickReferrer } = props;
   let history = useHistory();
 
   const backToHome = () => {
-    props.handleClickReferrer();
+    handleClickReferrer();
     history.push("/");
   };
 
@@ -23,6 +24,8 @@ const NotFound = (props) => {
   );
 };
 
-NotFound.propTypes = {};
+NotFound.propTypes = {
+  handleClickReferrer: PropTypes.func.isRequired,
+};
 
 export default NotFound;

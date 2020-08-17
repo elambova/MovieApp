@@ -67,9 +67,12 @@ function Movies(props) {
     </React.Fragment>
   );
 }
-
+// movies, secure_url, handleClickMovie, handleClickTv
 Movies.propTypes = {
   movies: PropTypes.array.isRequired,
+  secure_url: PropTypes.string.isRequired,
+  handleClickMovie: PropTypes.func.isRequired,
+  handleClickTv: PropTypes.func.isRequired,
 };
 
 export default Movies;

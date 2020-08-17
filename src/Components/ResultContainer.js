@@ -15,6 +15,7 @@ function ResultContainer(props) {
     handleClickPerson,
     handleClickReferrer,
   } = props;
+
   const dataLenght = Object.values(data).length;
 
   let history = useHistory();
@@ -109,6 +110,10 @@ function ResultContainer(props) {
 
 ResultContainer.propTypes = {
   data: PropTypes.object.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
+  handleClickMovie: PropTypes.func.isRequired,
+  handleClickTv: PropTypes.func.isRequired,
+  handleClickPerson: PropTypes.func.isRequired,
 };
 
 export default ResultContainer;

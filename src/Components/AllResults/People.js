@@ -93,6 +93,10 @@ function People(props) {
 
 People.propTypes = {
   people: PropTypes.array.isRequired,
+  secure_url: PropTypes.string.isRequired,
+  handleClickMovie: PropTypes.func.isRequired,
+  handleClickTv: PropTypes.func.isRequired,
+  handleClickPerson: PropTypes.func.isRequired,
 };
 
 export default People;

@@ -69,6 +69,7 @@ function Person(props) {
 
 Person.propTypes = {
   person: PropTypes.object.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
 };
 
 export default Person;
