@@ -10,9 +10,10 @@ import Form from "./Components/Form";
 import Footer from "./Components/Footer";
 import * as connect from "./ConnectionAPI/connect";
 import ResultContainer from "./Components/ResultContainer";
-import Movie from "./Components/Movie/Movie";
-import Tv from "./Components/Movie/Tv";
-import Person from "./Components/Movie/Person";
+import Movie from "./Components/SingleResult/Movie";
+import Tv from "./Components/SingleResult/Tv";
+import Person from "./Components/SingleResult/Person";
+import Season from "./Components/SingleResult/Season";
 import Loader from "react-loader-spinner";
 import ScrollToTop from "react-scroll-to-top";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,10 +70,10 @@ class App extends Component {
     });
   };
 
-  handleClickSeason = (id) => {
+  handleClickSeason = (tvId, seasonNumber) => {
     this.setState({ loadingSeason: true }, async () => {
       await connect
-        .getDataSeason(id)
+        .getDataSeason(tvId, seasonNumber)
         .then((season) =>
           this.setState({ season: season, loadingSeason: false })
         );
@@ -174,11 +175,13 @@ class App extends Component {
                   Object.values(tv).length > 0 && (
                     <React.Fragment>
                       <Route
+                        exact
                         path={`/tv/${tv.apiData.id}`}
                         render={() => (
                           <Tv
                             tv={tv}
                             handleClickReferrer={this.handleClickReferrer}
+                            handleClickSeason={this.handleClickSeason}
                           />
                         )}
                       />
@@ -220,10 +223,12 @@ class App extends Component {
                   Object.values(season).length > 0 && (
                     <React.Fragment>
                       <Route
-                        path={`/season/${season.apiData.id}`}
+                        exact
+                        path={`/tv/${tv.apiData.id}/season/${season.apiData.season_number}`}
                         render={() => (
                           <Season
                             season={season}
+                            tvId={tv.apiData.id}
                             handleClickReferrer={this.handleClickReferrer}
                           />
                         )}
