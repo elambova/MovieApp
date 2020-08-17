@@ -26,6 +26,7 @@ class App extends Component {
       movie: [],
       tv: [],
       person: [],
+      season: [],
       redirectToReferrer: false,
       loading: false,
       loadingMovie: false,
