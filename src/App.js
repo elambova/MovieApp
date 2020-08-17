@@ -14,6 +14,7 @@ import Movie from "./Components/SingleResult/Movie";
 import Tv from "./Components/SingleResult/Tv";
 import Person from "./Components/SingleResult/Person";
 import Season from "./Components/SingleResult/Season";
+import Episode from "./Components/SingleResult/Episode";
 import Loader from "react-loader-spinner";
 import ScrollToTop from "react-scroll-to-top";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,14 +29,17 @@ class App extends Component {
       tv: [],
       person: [],
       season: [],
+      episode: [],
       redirectToReferrer: false,
       loading: false,
       loadingMovie: false,
       loadingTv: false,
       loadingPerson: false,
       loadingSeason: false,
+      loadingEpisode: false,
     };
   }
+
   handleSubmit = (data) => {
     this.setState({ loading: true, redirectToReferrer: true }, async () => {
       await connect.getData(data).then((data) => {
@@ -80,6 +84,16 @@ class App extends Component {
     });
   };
 
+  handleClickEpisode = (tvId, seasonNumber, episodeNumber) => {
+    this.setState({ loadingEpisode: true }, async () => {
+      await connect
+        .getDataEpisode(tvId, seasonNumber, episodeNumber)
+        .then((episode) =>
+          this.setState({ episode: episode, loadingEpisode: false })
+        );
+    });
+  };
+
   handleClickReferrer = () => {
     this.setState({ redirectToReferrer: false });
   };
@@ -91,13 +105,17 @@ class App extends Component {
       tv,
       person,
       season,
+      episode,
       redirectToReferrer,
       loading,
       loadingMovie,
       loadingTv,
       loadingPerson,
       loadingSeason,
+      loadingEpisode,
     } = this.state;
+
+    console.log(episode);
 
     return (
       <Router>
@@ -229,6 +247,33 @@ class App extends Component {
                           <Season
                             season={season}
                             tvId={tv.apiData.id}
+                            handleClickEpisode={this.handleClickEpisode}
+                            handleClickReferrer={this.handleClickReferrer}
+                          />
+                        )}
+                      />
+                    </React.Fragment>
+                  )
+                )}
+                {loadingEpisode ? (
+                  <Loader
+                    className="loader"
+                    type="Bars"
+                    color="#02588a"
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  Object.values(episode).length > 0 && (
+                    <React.Fragment>
+                      <Route
+                        exact
+                        path={`/tv/${tv.apiData.id}/season/${season.apiData.season_number}/episode/${episode.apiData.episode_number}`}
+                        render={() => (
+                          <Episode
+                            episode={episode}
+                            tvId={tv.apiData.id}
+                            seasonNumber={season.apiData.season_number}
                             handleClickReferrer={this.handleClickReferrer}
                           />
                         )}
