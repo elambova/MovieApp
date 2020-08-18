@@ -34,12 +34,14 @@ function Season(props) {
         <h2 className="tv-name">{apiData.name}</h2>
         <div>
           <div>
-            {apiData.poster_path !== null && (
-              <img
-                src={`${secure_url}w500${apiData.poster_path}`}
-                alt={apiData.name}
-              />
-            )}
+            <img
+              src={
+                apiData.poster_path === null
+                  ? `${noPhotoFound}`
+                  : `${secure_url}w342${apiData.poster_path}`
+              }
+              alt={apiData.name}
+            />
           </div>
           <div className="more-info">
             <time className="bold" datatype={apiData.air_date}>
@@ -52,33 +54,38 @@ function Season(props) {
               </div>
             )}
           </div>
-          {apiData.episodes.length !== 0 && (
-            <div className="episodes">
-              <ul>
-                {apiData.episodes.map((episode) => (
-                  <li key={episode.id} id={episode.id}>
-                    <Link
-                      to={`/tv/${tvId}/season/${apiData.id}/episode/${episode.episode_number}`}
-                      onClick={() =>
-                        clickEpisode(tvId, apiData.id, episode.episode_number)
-                      }
-                    >
-                      <p className="bold">{episode.name}</p>
-                      <img
-                        src={
-                          episode.poster_path === null
-                            ? `${noPhotoFound}`
-                            : `${secure_url}w300${episode.still_path}`
-                        }
-                        alt={episode.name}
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
+        {apiData.episodes.length !== 0 && (
+          <div className="episodes">
+            <p className="bold">Episodes: </p>
+            <ul>
+              {apiData.episodes.map((episode) => (
+                <li key={episode.id} id={episode.id}>
+                  <Link
+                    to={`/tv/${tvId}/season/${apiData.season_number}/episode/${episode.episode_number}`}
+                    onClick={() =>
+                      clickEpisode(
+                        tvId,
+                        apiData.season_number,
+                        episode.episode_number
+                      )
+                    }
+                  >
+                    <p className="bold">Episode {episode.episode_number}</p>
+                    <img
+                      src={
+                        episode.poster_path === null
+                          ? `${noPhotoFound}`
+                          : `${secure_url}w300${episode.still_path}`
+                      }
+                      alt={episode.name}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );
