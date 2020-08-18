@@ -52,7 +52,7 @@ app.use(function (req, res, next) {
 });
 
 // designates what port the app will listen to for incoming requests
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 5050;
 
 // Spin up th server
 app.listen(port, listening);
