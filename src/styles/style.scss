@@ -152,14 +152,20 @@ body {
 #specificMovie,
 #specificTv,
 #specificSeason,
+#specificEpisode,
 #specificPerson {
   .movie-title,
   .tv-title,
   .person-name,
-  .tv-name {
+  .tv-name,
+  .episode-name {
     text-align: center;
     margin-bottom: 20px;
     font-size: 25px;
+  }
+
+  .episode-number {
+    text-align: center;
   }
 
   & > div {
@@ -221,7 +227,8 @@ body {
     }
   }
 
-  .seasons {
+  .seasons,
+  .episodes {
     border-top: 1px solid $base-color;
     margin: 20px auto;
     padding-top: 20px;
@@ -240,6 +247,8 @@ body {
 
       li {
         margin: 10px 30px;
+        max-width: 200px;
+
         a {
           color: #000;
           text-decoration: none;
@@ -249,44 +258,28 @@ body {
           }
 
           img {
-            height: 260px;
+            max-height: 260px;
+            width: 100%;
           }
         }
       }
     }
   }
+}
 
-  .episodes {
-    border-top: 1px solid $base-color;
+#specificEpisode {
+  text-align: center;
+
+  img {
+    display: block;
     margin: 20px auto;
-    padding-top: 20px;
-    width: 90%;
-
-    p {
-      width: 100%;
-    }
-
-    ul {
-      list-style-type: none;
-
-      li {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid $base-color;
-        padding: 20px 0;
-
-        & > div {
-          width: 45%;
-          margin: 10px auto;
-
-          img {
-            width: auto;
-          }
-        }
-      }
-    }
+    width: 50%;
+    border-radius: 10px;
+  }
+  p.bold {
+    border-top: 1px solid $base-color;
+    margin-top: 10px;
+    padding: 10px 0;
   }
 }
 
