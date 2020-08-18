@@ -115,8 +115,6 @@ class App extends Component {
       loadingEpisode,
     } = this.state;
 
-    console.log(episode);
-
     return (
       <Router>
         <React.Fragment>
@@ -273,7 +271,6 @@ class App extends Component {
                           <Episode
                             episode={episode}
                             tvId={tv.apiData.id}
-                            seasonNumber={season.apiData.season_number}
                             handleClickReferrer={this.handleClickReferrer}
                           />
                         )}
