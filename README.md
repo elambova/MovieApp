@@ -29,7 +29,7 @@ For the result to be obtained there must be credentials for the APIS used in the
 
 They have saved in `.env` file with:
 
-- MOVIE_API_KEY for The Movie Database API
+- **MOVIE_API_KEY** for The Movie Database API
 
 The next step is to execute the following commands:
 
@@ -65,7 +65,7 @@ In `src/ConnectionAPI` folder is `connect.js` file who contain all (six) fetch r
 
 ### Server
 
-Server is Express. To connect to API has used `node-fetch` module, who make request to The Movie Database API. To make request to API is required to get API-KEY (he is saved in .env file (it is sensitive information about it is not part of the files)).
+Server is Express. To connect to API has used `node-fetch` module, who make request to The Movie Database API..
 
 ### React
 
