@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ResultContainer renders without crashing given the required props 1`] = `
+<Fragment>
+  <Link
+    className="back"
+    onClick={[Function]}
+    title="Back to Home"
+    to="/"
+  >
+    « 
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Object {
+          "icon": Array [
+            576,
+            512,
+            Array [],
+            "f015",
+            "M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z",
+          ],
+          "iconName": "home",
+          "prefix": "fas",
+        }
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      swapOpacity={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+  </Link>
+  <div
+    className="content"
+  >
+    <Movies
+      handleClickMovie={[Function]}
+      handleClickTv={[Function]}
+      movies={
+        Array [
+          Object {
+            "adult": false,
+            "backdrop_path": "/kobscH4qOsYQNTZnkrF5zkPCsvX.jpg",
+            "genre_ids": Array [
+              28,
+              12,
+              14,
+            ],
+            "id": 285,
+            "media_type": "movie",
+            "original_language": "en",
+            "original_title": "Pirates of the Caribbean: At World's End",
+            "overview": "Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.",
+            "popularity": 25.421,
+            "poster_path": "/jGWpG4YhpQwVmjyHEGkxEkeRf0S.jpg",
+            "release_date": "2007-05-19",
+            "title": "Pirates of the Caribbean: At World's End",
+            "video": false,
+            "vote_average": 7.2,
+            "vote_count": 10081,
+          },
+        ]
+      }
+      secure_url="https://image.tmdb.org/t/p/w185"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`Test ResultContainer should be render 1`] = `ShallowWrapper {}`;
