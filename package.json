@@ -7,7 +7,8 @@
     "start": "node server/index.js",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
@@ -16,16 +17,20 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "babel-jest": "^26.3.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
     "express": "^4.17.1",
+    "jest": "^26.4.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",
     "react-router-dom": "^5.2.0",
-    "react-scroll-to-top": "^1.0.5"
+    "react-scroll-to-top": "^1.0.5",
+    "react-test-renderer": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -35,13 +40,24 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
+    "enzyme-adapter-react-16": "^1.15.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest-transform-stub": "^2.0.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
+  },
+  "jest": {
+    "bail": 1,
+    "verbose": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    }
   },
   "proxy": "http://192.168.1.100:5050"
 }
