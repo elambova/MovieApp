@@ -856,10 +856,10 @@ const episodeData = {
   },
 };
 
-beforeEach(() => {
-  app = mount(<App />);
-});
 describe("App container", () => {
+  beforeEach(() => {
+    app = mount(<App />);
+  });
   test("should be exists", () => {
     expect(app.exists()).toBe(true);
   });
