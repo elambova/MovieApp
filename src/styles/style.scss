@@ -101,24 +101,11 @@ body {
     }
   }
 
+  #person-info a.link {
+    margin: 10px auto !important;
+  }
   & > div {
     text-align: center;
-  }
-
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-
-    & > #person-info {
-      flex: 0 0 100%;
-
-      a.link {
-        margin: 10px auto !important;
-      }
-    }
 
     a.link {
       color: #000;
@@ -144,6 +131,18 @@ body {
         height: 260px;
         width: 175px;
       }
+    }
+  }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    & > h2 {
+      flex: 0 0 100%;
     }
   }
 }
