@@ -41,6 +41,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-to-json": "^3.5.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "jest-transform-stub": "^2.0.0",
