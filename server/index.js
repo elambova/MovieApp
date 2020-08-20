@@ -54,8 +54,10 @@ app.use(function (req, res, next) {
 // designates what port the app will listen to for incoming requests
 let port = process.env.PORT || 5050;
 
-// Spin up th server
-app.listen(port, listening);
+if (process.env.NODE_ENV !== "test") {
+  // Spin up th server
+  app.listen(port, listening);
+}
 
 // Callback function for listen, initialize in console that the server is running and the contents of localhost:8080
 function listening() {
