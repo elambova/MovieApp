@@ -21,7 +21,7 @@ function Movies(props) {
   };
 
   return (
-    <React.Fragment>
+    <div className="flex-container">
       {moviesLenght > 0 &&
         movies.map((movie) =>
           movie.media_type === "movie" ? (
@@ -64,7 +64,7 @@ function Movies(props) {
             </Link>
           )
         )}
-    </React.Fragment>
+    </div>
   );
 }
 // movies, secure_url, handleClickMovie, handleClickTv

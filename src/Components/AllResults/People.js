@@ -45,7 +45,7 @@ function People(props) {
           </Link>
         </div>
       )}
-      <React.Fragment>
+      <div className="flex-container">
         <h2>Movies</h2>
         {peopleLenght > 0 &&
           people[0].known_for.length > 0 &&
@@ -86,7 +86,7 @@ function People(props) {
               )
             )
           )}
-      </React.Fragment>
+      </div>
     </React.Fragment>
   );
 }
