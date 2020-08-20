@@ -14,10 +14,10 @@ const NotFound = (props) => {
   return (
     <div>
       <h1>
-        No search results! Please go to the{" "}
+        No search results! Please go to the
         <Link to="/" className="back-link" onClick={backToHome}>
           homepage
-        </Link>{" "}
+        </Link>
         for a new search!
       </h1>
     </div>
