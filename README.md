@@ -61,11 +61,11 @@ In `src/ConnectionAPI` folder is `connect.js` file who contain all (six) fetch r
 - **getDataTv(id)** - return data for tv (tv show) with this id
 - **getDataPerson(id)** - return data for person with this id
 - **getDataSeason(tvId, seasonNumber)** - return data for season from tv (tv shows) with this id and this season number
-- **getDataEpisode(tvId, seasonNumber)** - return data for episode from season in tv (tv shows) with this id, season number and episode number
+- **getDataEpisode(tvId, seasonNumber, episodeNumber)** - return data for episode from season in tv (tv shows) with this id, season number and episode number
 
 ### Server
 
-Server is Express. To connect to API has used `node-fetch` module, who make request to The Movie Database API..
+Server is Express. To connect to API has used `node-fetch` module, who make request to The Movie Database API.
 
 ### React
 
@@ -82,3 +82,23 @@ In the subfolders are respectively for:
   - **Tv.js** - return tv with this concrete id
   - **Season.js** - return season with this concrete tv id and season number
   - **Episode.js** - return episode with this concrete tv id, season number and episode number
+
+### Tests
+
+For tests is use JEST. There is in `src/tests` folder. There are tests for all js files (`server/index.js`, `src/ConnectionAPI/connect.js`, `src/App.js`, `src/index.js` and all files in `src/Components`). For run test is needed to start server with:
+
+```
+cd server && npm start
+```
+
+and in new tab run:
+
+```
+npm run test
+```
+
+or
+
+```
+npm test
+```
