@@ -2,6 +2,8 @@
 
 This app is for user making search for movie from The Movie Database API.
 
+---
+
 ## Introduction
 
 In this app is used:
@@ -13,6 +15,8 @@ In this app is used:
 - Webpack
 - Express
 - Jest
+
+---
 
 ### Getting started
 
@@ -52,6 +56,8 @@ In a new terminal tab in same directory run server with:
 npm start
 ```
 
+---
+
 ### API connection
 
 In `src/ConnectionAPI` folder is `connect.js` file who contain all (six) fetch request to server. They are:
@@ -63,9 +69,13 @@ In `src/ConnectionAPI` folder is `connect.js` file who contain all (six) fetch r
 - **getDataSeason(tvId, seasonNumber)** - return data for season from tv (tv shows) with this id and this season number
 - **getDataEpisode(tvId, seasonNumber, episodeNumber)** - return data for episode from season in tv (tv shows) with this id, season number and episode number
 
+---
+
 ### Server
 
 Server is Express. To connect to API has used `node-fetch` module, who make request to The Movie Database API.
+
+---
 
 ### React
 
@@ -83,12 +93,14 @@ In the subfolders are respectively for:
   - **Season.js** - return season with this concrete tv id and season number
   - **Episode.js** - return episode with this concrete tv id, season number and episode number
 
+---
+
 ### Tests
 
 For tests is use JEST. There is in `src/tests` folder. There are tests for all js files (`server/index.js`, `src/ConnectionAPI/connect.js`, `src/App.js`, `src/index.js` and all files in `src/Components`). For run test is needed to start server with:
 
 ```
-cd server && npm start
+npm start
 ```
 
 and in new tab run:
@@ -102,3 +114,65 @@ or
 ```
 npm test
 ```
+
+---
+
+### Screenshots
+
+---
+
+<div align="center">
+
+#### Homepage
+
+![Homepage](src/images/screenshots/home.png)
+
+---
+
+#### Search Movie
+
+![Search Movie](src/images/screenshots/search-movie.png)
+
+---
+
+##### Movie Open
+
+![Movie Open](src/images/screenshots/movie-open.png)
+
+---
+
+#### Search Tv
+
+![Search Tv](src/images/screenshots/search-tv.png)
+
+---
+
+##### TV Open
+
+![Tv Open](src/images/screenshots/tv-open.png?style=)
+
+---
+
+##### Season Open
+
+![Season Open](src/images/screenshots/season-open.png)
+
+---
+
+##### Episode Open
+
+![Episode Open](src/images/screenshots/episode-open.png)
+
+---
+
+#### Search Person
+
+![Search Person](src/images/screenshots/search-person.png)
+
+---
+
+##### Person Open
+
+![Person Open](src/images/screenshots/person-open.png)
+
+</div>
