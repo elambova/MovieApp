@@ -67,6 +67,10 @@ function Episode(props) {
   );
 }
 
-Episode.propTypes = {};
+Episode.propTypes = {
+  episode: PropTypes.object.isRequired,
+  tvId: PropTypes.number.isRequired,
+  handleClickReferrer: PropTypes.func.isRequired,
+};
 
 export default Episode;
